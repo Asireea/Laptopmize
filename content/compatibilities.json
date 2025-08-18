@@ -1,0 +1,95 @@
+{
+    "MOTHERBOARD":
+    {
+        "customizable": false,
+        "items": 
+        [
+            {
+                "name": "Apple MSI MEG X670E ACE",
+                "dependencies":
+                {
+                    "CPU":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 1,
+                        "values": ["Apple M4 (10‑core)", "Intel Xeon W-3223", "Intel Xeon W-3265M", "Intel Xeon W-3225"]
+                    },
+                    "GPU":
+                    {   
+                        "customizable": true,
+                        "multipleComponents": 1,
+                        "values": ["Apple M4 GPU (10‑core)", "AMD Radeon Pro W5500X", "AMD Radeon Pro Vega II Duo", "AMD Radeon RX 6800 XT"]
+                    },
+                    "RAM":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 4,
+                        "values": ["Crucial 32GB DDR4 ECC 2933MHz", "OWC 64GB DDR4 ECC 2933MHz", "Kingston 16GB DDR4 ECC 2933MHz",
+                                    "Samsung 32GB DDR4 ECC 2933MHz", "Corsair Vengeance 32GB DDR5 6000MHz CL38 Dual Channel", 
+                                    "Timetec 32GB DDR4 SO-DIMM 2666MHz"]
+                    },
+                    "STORAGE":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 2,
+                        "values": ["Apple proprietary SSD blade (Mac Pro 2019)", "SSD OWC Aura Pro X2", "SSD Samsung 970 EVO Plus",
+                                    "Apple OEM SSD 1TB", "SSD Transcend JetDrive 820"]
+                    },
+                    "OS":
+                    {
+                        "customizable": false,
+                        "multipleComponents": 1,
+                        "values": ["macOS"]
+                    }
+                }
+            },
+
+            {
+                "name": "ASUS ROG Strix Z790-E Gaming",
+                "dependencies":
+                {
+                    "CPU": 
+                    {   
+                        "customizable": true,
+                        "multipleComponents": 1,
+                        "values": ["AMD Ryzen 5 3600", "AMD Ryzen 7 7700", "AMD Ryzen 9 7950X", "AMD Ryzen 5 7600X", "AMD Ryzen 7 7800X3D"]
+                    },
+                    "GPU":
+                    {   
+                        "customizable": true,
+                        "multipleComponents": 1,
+                        "values": ["AMD Radeon RX 9060 XT", "AMD Radeon RX 6500 XT", "NVIDIA GeForce GTX 1650 Super", 
+                                    "AMD Radeon RX 6700 XT", "NVIDIA GeForce RTX 4070", "AMD Radeon RX 7800 XT", 
+                                    "Intel Arc A380", "AMD Radeon RX 6650 XT", "NVIDIA GeForce RTX 3060"]
+                    },
+                    "RAM":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 2,
+                        "values": ["Corsair Vengeance 32GB DDR5 6000MHz CL38 Dual Channel", "Corsair Vengeance LPX DDR4-3200",
+                                    "Lexar THOR OC 32GB DDR5 6000MHz CL38 Dual Channel", "Lexar ARES Black 32GB DDR5 6000MHz CL32 Dual Channel"]
+                    },
+                    "STORAGE":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 4,
+                        "values": ["SSD Samsung 990 Pro", "SSD WD Black SN850X", "WD Blue SN570 1TB", "Samsung 870 EVO 1TB",
+                                    "SSD Corsair MP700 Pro SE", "HDD Seagate Barracuda"]
+                    },
+                    "OS":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 1,
+                        "values": ["Windows 11", "Windows 10", "Ubuntu", "Arch Linux", "Fedora Linux", "Manjaro Linux",
+                                    "NixOS", "ChromeOS", "MS DOS"]
+                    }
+                }
+            }
+        ]
+    },
+    "DISPLAY":
+    {
+        "customizable": false,
+        "items": []
+    }
+}

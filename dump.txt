@@ -1,0 +1,205 @@
+{
+    "MSI MEG X670E ACE": {
+        "type": "motherboard",
+        "customizable": "false",
+        "dependencies": {
+                            "CPU": ["Apple M4 (10‑core)", "AMD Ryzen 5 3600", "AMD Ryzen 7 7700"],
+                            "GPU": ["Apple GPU (10‑core)", "AMD Radeon RX 9060 XT", "AMD Radeon 7800 XT"]
+                        }
+
+    }
+}
+
+
+{
+    "motherboards": 
+    {
+        "Apple MSI MEG X670E ACE":
+        {
+            "CPU": 
+            {   
+                "customizable": true,
+                "multipleComponents": 0,
+                "values": ["Apple M4 (10‑core)", "Intel Xeon W-3223", "Intel Xeon W-3265M", "Intel Xeon W-3225"]
+            },
+            "GPU":
+            {   
+                "customizable": true,
+                "multipleComponents": 0,
+                "values": ["Apple GPU (10‑core)", "AMD Radeon Pro W5500X", "AMD Radeon Pro Vega II Duo", "AMD Radeon RX 6800 XT"]
+            },
+            "RAM":
+            {
+                "customizable": true,
+                "multipleComponents": 4,
+                "values": ["Corsair Vengeance 32GB DDR5 6000MHz CL38 Dual Channel", "Patriot Viper Venom 32GB DDR5 6000MHz CL36 Dual Channel",
+                            "Lexar THOR OC 32GB DDR5 6000MHz CL38 Dual Channel", "Lexar ARES Black 32GB DDR5 6000MHz CL32 Dual Channel"]
+            },
+            "STORAGE":
+            {
+                "customizable": true,
+                "multipleComponents": 2,
+                "values": ["SSD Samsung 990 Pro", "SSD WD Black SN850X", "SSD Crucial T700", "SSD Seagate FireCuda 540", 
+                            "SSD Corsair MP700 Pro SE", "HDD Seagate Barracuda", "HDD Toshiba X300", "HDD Seagate IronWolf"]
+            },
+            "OS":
+            {
+                "customizable": false,
+                "multipleComponents": 0,
+                "values": ["Windows 11", "Windows 10", "Ubuntu", "Arch Linux", "Fedora Linux", "Manjaro Linux",
+                            "NixOS", "ChromeOS", "MS DOS"]
+            }
+        },
+
+        "ASUS ROG Strix Z790-E Gaming":
+        {
+            "CPU": 
+            {   
+                "customizable": true,
+                "multipleComponents": 0,
+                "values": ["Apple M4 (10‑core)", "AMD Ryzen 7 7700"]
+            },
+            "GPU":
+            {   
+                "customizable": true,
+                "multipleComponents": 0,
+                "values": ["AMD Radeon RX 9060 XT", "AMD Radeon RX 6500 XT", "NVIDIA GeForce GTX 1650 Super", 
+                            "AMD Radeon RX 6700 XT", "NVIDIA GeForce RTX 4070", "AMD Radeon RX 7800 XT", 
+                            "Intel Arc A380", "AMD Radeon RX 6650 XT", "NVIDIA GeForce RTX 3060"]
+            },
+            "RAM":
+            {
+                "customizable": true,
+                "multipleComponents": 2,
+                "values": ["Corsair Vengeance 32GB DDR5 6000MHz CL38 Dual Channel", 
+                            "Lexar THOR OC 32GB DDR5 6000MHz CL38 Dual Channel", "Lexar ARES Black 32GB DDR5 6000MHz CL32 Dual Channel"]
+            },
+            "STORAGE":
+            {
+                "customizable": true,
+                "multipleComponents": 2,
+                "values": ["SSD Samsung 990 Pro", "SSD WD Black SN850X", 
+                            "SSD Corsair MP700 Pro SE", "HDD Seagate Barracuda"]
+            },
+            "OS":
+            {
+                "customizable": true,
+                "multipleComponents": 0,
+                "values": ["Windows 11", "Windows 10", "Arch Linux", "Fedora Linux", "Manjaro Linux",
+                            "NixOS"]
+            }
+        },
+
+        "Gigabyte X670E AORUS Master":
+        {
+            "CPU": 
+            {   
+                "customizable": true,
+                "multipleComponents": 0,
+                "values": ["AMD Ryzen 5 3600", "AMD Ryzen 7 7700"]
+            },
+            "GPU":
+            {   
+                "customizable": true,
+                "multipleComponents": 0,
+                "values": ["Apple GPU (10‑core)", "AMD Radeon 7800 XT"]
+            },
+            "RAM":
+            {
+                "customizable": true,
+                "multipleComponents": 2,
+                "values": ["Corsair Vengeance 32GB DDR5 6000MHz CL38 Dual Channel", "Patriot Viper Venom 32GB DDR5 6000MHz CL36 Dual Channel",
+                            "Lexar THOR OC 32GB DDR5 6000MHz CL38 Dual Channel"]
+            },
+            "STORAGE":
+            {
+                "customizable": true,
+                "multipleComponents": 1,
+                "values": ["SSD Corsair MP700 Pro SE", "HDD Seagate Barracuda", "HDD Toshiba X300", "HDD Seagate IronWolf"]
+            },
+            "OS":
+            {
+                "customizable": true,
+                "multipleComponents": 0,
+                "values": ["Windows 11", "Windows 10", "Ubuntu", "Arch Linux", "Fedora Linux", "Manjaro Linux",
+                            "NixOS", "ChromeOS", "MS DOS"]
+            }
+        }
+    },
+
+    "CPUs":
+    {
+        "Apple M4 (10‑core)":
+        {
+            "customizable": true,
+            "dependencies": 
+            {
+                "MOTHERBOARD": ["MSI MEG X670E ACE"],
+                "GPU": ["Apple GPU (10‑core)"],
+                "RAM": ["Corsair Vengeance 32GB DDR5 6000MHz CL38 Dual Channel", 
+                        "Patriot Viper Venom 32GB DDR5 6000MHz CL36 Dual Channel"],
+                "OS": ["macOS"]
+            }
+        },
+        "AMD Ryzen 5 3600":
+        {
+            "customizable": true,
+            "dependencies":
+            {
+                "MOTHERBOARD":["Gigabyte Z790 AORUS Master", "ASUS ROG Strix Z790-E Gaming", "Gigabyte X670E AORUS Master",
+                                "ASUS ROG Crosshair X670E Hero"],
+                "GPU": ["AMD Radeon RX 6500 XT", "NVIDIA GeForce GTX 1650 Super", "AMD Radeon RX 6700 XT", "NVIDIA GeForce RTX 4070",
+                        "AMD Radeon RX 7800 XT", "Intel Arc A380", "AMD Radeon RX 6650 XT", "NVIDIA GeForce RTX 3060"],
+                "RAM": ["G.Skill Ripjaws V DDR4-3600", "TeamGroup T-Force Vulcan Z DDR4-3200", "Corsair Vengeance LPX DDR4-3200",
+                        "TeamGroup T-Force Vulcan Z DDR4-3200", "Corsair Vengeance RGB Pro DDR4-3600"]
+            }
+        }
+    }
+}
+
+
+{
+    "itemGroup1":
+    {
+        "customizable":false,
+        "itemName":
+        {
+            "dependencies":
+            {
+                "component":
+                {
+                    "multipleComponents": 1,
+                    "values": []
+                }
+            }
+
+        }
+    }
+
+    "itemGroup2":
+    {
+        "customizable": false
+    }
+
+}
+
+
+ "OS":
+    {
+        "customizable": true,
+        "items":
+        [
+            {
+                "name": "macOS",
+                "dependencies": 
+                {
+                    "Motherboard":
+                    {
+                        "customizable": false,
+                        "multipleComponents": 1,
+                        "values": ["Apple MSI MEG X670E ACE"]
+                    }
+                }
+            }
+        ]
+    }

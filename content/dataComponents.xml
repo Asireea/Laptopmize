@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <motherboards>
+        <MOTHERBOARD src="components/Apple-MSI-MEG-X670E-ACE.jpg" nume="Apple MSI MEG X670E ACE">
+            <specificatii>
+                <Socket>Apple</Socket>
+                <MemorySupport>4× DDR5 DIMM slots</MemorySupport>
+                <Networking>Wi-Fi 6E</Networking>
+                <Bluetooth>Bluetooth 5.3</Bluetooth>
+                <Storage>2× M.2 slots</Storage>
+            </specificatii>
+        </MOTHERBOARD>
+
+        <MOTHERBOARD src="components/ASUS-ROG-Strix-Z790-E-Gaming.jpg" nume="ASUS ROG Strix Z790-E Gaming">
+            <specificatii>
+                <Socket>AMD</Socket>
+                <MemorySupport>2× DDR5 DIMM slots</MemorySupport>
+                <Networking>Wireless: Intel Wi‑Fi 6E &amp; Ethernet: 2.5 Gb Intel LAN</Networking>
+                <Bluetooth>X</Bluetooth>
+                <Storage>4× SATA 6 Gb/s ports</Storage>
+            </specificatii>
+        </MOTHERBOARD>
+    </motherboards>
+
+    <processors>
+        <CPU src="components/AMD-Ryzen-5-3600.jpg" nume="AMD Ryzen 5 3600">
+            <specificatii>
+                <Freqency>3.6 GHz</Freqency>
+                <NumberOfCores>6</NumberOfCores>
+                <NumberOfThreads>12</NumberOfThreads>
+            </specificatii>
+        </CPU>
+
+        <CPU src="components/AMD-Ryzen-7-7700.jpg" nume="AMD Ryzen 7 7700">
+            <specificatii>
+                <Freqency>3.8 GHz</Freqency>
+                <NumberOfCores>8</NumberOfCores>
+                <NumberOfThreads>16</NumberOfThreads>
+                <Multithreading>Yes</Multithreading>
+            </specificatii>
+        </CPU>
+
+        <CPU src="components/Apple-M4-(10‑core).jpg" nume="Apple M4 (10‑core)">
+            <specificatii>
+                <Freqency>4.4 GHz</Freqency>
+                <Graphics>Built-in GPU</Graphics>
+                <PowerConsumption>~22 W nominal, ~40 W peak</PowerConsumption>
+            </specificatii>
+        </CPU>
+
+        <CPU src="components/Intel-Xeon-W-3223.jpg" nume="Intel Xeon W-3223">
+            <specificatii>
+                <NumberOfCores>8</NumberOfCores>
+                <NumberOfThreads>16</NumberOfThreads>
+                <Freqency>3.50 GHz</Freqency>
+            </specificatii>
+        </CPU>
+    </processors>
+
+    <graphicsCards>
+        <GPU src="components/AMD-Radeon-RX-9060-XT.jpg" nume="AMD Radeon RX 9060 XT">
+            <specificatii>
+                <Freqency>2530 MHz</Freqency>
+                <MemorySize>16 GB</MemorySize>
+                <MemoryType>GDDR6</MemoryType>
+            </specificatii>
+        </GPU>
+
+        <GPU src="components/AMD-Radeon-7800-XT.jpg" nume="AMD Radeon 7800 XT">
+            <specificatii>
+                <Freqency>2124 MHz</Freqency>
+                <MemorySize>16 GB</MemorySize>
+                <MemoryType>DDR6</MemoryType>
+                <Gaming>Yes</Gaming>
+                <PowerRequirement>700 W</PowerRequirement>
+            </specificatii>
+        </GPU>
+
+        <GPU src="components/Apple-M4-GPU-(10‑core).jpg" nume="Apple M4 GPU (10‑core)">
+            <specificatii>
+                <ClockSpeeds>Base ~500 MHz, Boost ~1700–1800 MHz</ClockSpeeds>
+                <MemoryBandwidth>120 GB/s</MemoryBandwidth>
+                <Features>Ray tracing, mesh shading, dynamic caching</Features>
+            </specificatii>
+        </GPU>
+    </graphicsCards>
+
+</root>

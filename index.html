@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="mainStyle.css">
+<!-- mainStyle.css is the style page for the website -->
+
+</head>
+<body>
+<!-- top bar -->
+<nav id="navigationBar">
+    <ul class="navBar">
+        <li>
+            <a id="logoLink" href="#">
+                <img src="images/logoSite.png" alt="Site Name">
+            </a> 
+        </li>
+        <li> <a id="shoppingCartLink" href="shopping-cart" class="cart-link"> 
+                <img src="images/shopping-cart.png" alt="Shopping Cart">
+                <span class="counterDot">0</span>
+            </a> 
+        </li>
+    </ul>
+</nav>
+
+<!-- container for the laptop cards and laptop specs pages -->
+<section id="leftAndMain">
+    <!-- container pentru afisarea array-ului de laptopuri -->
+    <section id="leftContainerLaptopuri" class="laptop-container">
+    
+    </section>
+    
+    <!-- se adauga fiecare laptop prin js -->
+
+    <!-- container for the laptop specs page -->
+    <section id="laptopSpecsPage" class="laptopPage">
+        <div id="laptopSpecsContainer"></div>
+        <div class="specsPageButtonsContainer"></div>
+        
+    </section>
+
+</section>
+
+<!-- container for the customization sidebar -->
+<section id="customizationMenu" class="sideBar">
+        <img class="sidebarCloser" src="images/back-arrow.png">
+
+        <!-- container for the components submenu and components pictures -->
+        <section class="componentsContainer"></section>
+</section>
+
+<script src="functions.js"></script>
+<script src="main.js"></script>
+<!-- file that contains the scripts used -->
+
+<div>
+    <img class="mainLaptopIcon">
+</div>
+</body>
+</html>

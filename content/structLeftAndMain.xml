@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+  <section id="leftContainerLaptopuri" class="laptop-container">
+    <section class="laptopCardClass" data-js-parent-iterator="laptop">
+      <a data-js-attributes="href"> 
+        <img data-js-attributes="src"/>
+      </a>
+      <a class="secondA" data-js-attributes="href" data-js-innerText="nume"></a>
+      <ul data-js-iterator="specificatii [cpu, display, os]">
+        <li><strong data-js-item-iterator="innerText"></strong></li>
+      </ul>
+    </section>
+  </section>
+
+  <section id="laptopSpecsPage" class="laptopPage">
+
+    <div id="laptopSpecsContainer"> 
+      <img class="mainLaptopIcon" data-js-attributes="src"/>
+      <ul data-js-iterator="specificatii">
+        <li><strong data-js-item-iterator="innerText"></strong></li>
+      </ul>
+    </div>
+
+    <div class="specsPageButtonsContainer">
+      <button class="customizeButton" role="button" data-js-innerText="Customize your laptop"></button>
+      <button class="addToCartButton" role="button">
+        <span class="text" data-js-innerText="Add to cart"></span></button>
+    </div>
+
+  </section>
+
+</root>

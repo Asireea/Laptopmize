@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <section class="componentsContainer">
+        <div class="menu-section">
+            <div class="menu-title">
+                <span></span>
+                <img class="downArrow" src="images/down-arrow.png" />
+            </div>
+
+            <div class="submenu">
+                <img class="componentImage"/>
+
+                <div class="tooltip-content">
+                    <ul data-js-iterator="specificatii">
+                        <li><strong data-js-item-iterator="innerText"></strong></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</root>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <laptop href="/laptop-apple-macbook-pro-14-2024-cu-procesor-apple-m4-10-nuclee-CPU-10-nuclee-GPU-16gb-512gb-ssd" src="laptop_icons/macbook-pro-14-m4.png" nume="Apple MacBook Pro 14&quot; (M4)">
+        <specificatii>
+            <motherboard>Apple MSI MEG X670E ACE</motherboard>
+            <cpu>Apple M4 (10‑core)</cpu>
+            <gpu>Apple GPU (10‑core)</gpu>
+            <ram>16GB</ram>
+            <storage>512GB SSD</storage>
+            <display>14" Liquid Retina XDR</display>
+            <os>macOS</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-lenovo-ideapad-slim-5-14irh10-i5-13420h-32gb-1tb" src="laptop_icons/lenovo-ideapad-slim-5-14.png" nume="Lenovo IdeaPad Slim 5 14IRH10">
+        <specificatii>
+            <motherboard>ASUS ROG Strix Z790-E Gaming</motherboard>
+            <cpu>Intel Core i5‑13420H</cpu>
+            <gpu>Intel UHD Graphics</gpu>
+            <ram>32GB</ram>
+            <storage>1TB SSD</storage>
+            <display>14" WUXGA IPS</display>
+            <os>No OS</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-asus-tuf-a14-fa401wv-ryzen-9-hx-370-32gb-1tb" src="laptop_icons/asus-tuf-a14.png" nume="ASUS TUF A14 FA401WV">
+        <specificatii>
+            <motherboard>Gigabyte X670E AORUS Master</motherboard>
+            <cpu>AMD Ryzen 9 HX 370</cpu>
+            <gpu>NVIDIA GeForce RTX 4060</gpu>
+            <ram>32GB</ram>
+            <storage>1TB SSD</storage>
+            <display>14" 2.5K IPS 165Hz</display>
+            <os>No OS</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-hp-probook-440-g11-i5-125u-16gb-512gb" src="laptop_icons/hp-probook-440-g11.png" nume="HP ProBook 440 G11">
+        <specificatii>
+            <motherboard>Gigabyte Z790 AORUS Master</motherboard>
+            <cpu>Intel Core Ultra 5 125U</cpu>
+            <gpu>Intel Graphics</gpu>
+            <ram>16GB</ram>
+            <storage>512GB SSD</storage>
+            <display>14" WUXGA IPS</display>
+            <os>Windows 11 Pro</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-gaming-lenovo-loq-15iax9-i5-12600hx-24gb-512gb" src="laptop_icons/lenovo-loq-15.png" nume="Lenovo LOQ 15 IAX9">
+        <specificatii>
+            <motherboard>ASUS ROG Crosshair X670E Hero</motherboard>
+            <cpu>Intel Core i5‑12600HX</cpu>
+            <gpu>NVIDIA GeForce RTX 3050</gpu>
+            <ram>24GB</ram>
+            <storage>512GB SSD</storage>
+            <display>15.6" FHD 144Hz</display>
+            <os>No OS</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-acer-aspire-5-a515-57-i7-12650h-16gb-1tb" src="laptop_icons/acer-aspire-5-15.png" nume="Acer Aspire 5 A515‑57">
+        <specificatii>
+            <motherboard>ASRock B650 Steel Legend</motherboard>
+            <cpu>Intel Core i7‑12650H</cpu>
+            <gpu>Intel UHD Graphics</gpu>
+            <ram>16GB</ram>
+            <storage>1TB SSD</storage>
+            <display>15.6" FHD IPS</display>
+            <os>No OS</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-msi-cyborg-15-a13vf-i7-13620h-16gb-1tb" src="laptop_icons/msi-cyborg-15.png" nume="MSI Cyborg 15 A13VF">
+        <specificatii>
+            <motherboard>ASUS TUF Gaming B650-Plus</motherboard>
+            <cpu>Intel Core i7‑13620H</cpu>
+            <gpu>NVIDIA GeForce RTX 4060</gpu>
+            <ram>16GB</ram>
+            <storage>1TB SSD</storage>
+            <display>15.6" FHD IPS 144Hz</display>
+            <os>No OS</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-dell-vostro-3530-i5-1334u-16gb-512gb" src="laptop_icons/dell-vostro-3530.png" nume="Dell Vostro 3530">
+        <specificatii>
+            <motherboard>MSI B650M Mortar WiFi</motherboard>
+            <cpu>Intel Core i5‑1334U</cpu>
+            <gpu>Intel Iris Xe</gpu>
+            <ram>16GB</ram>
+            <storage>512GB SSD</storage>
+            <display>15.6" FHD IPS 120Hz</display>
+            <os>Windows 11 Pro</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-apple-macbook-pro-16-cu-m4-pro-14-core-48gb-512gb" src="laptop_icons/macbook-pro-16-m4pro.png" nume="Apple MacBook Pro 16&quot; (M4 Pro)">
+        <specificatii>
+            <motherboard>MSI MPG Z790 Carbon WiFi</motherboard>
+            <cpu>Apple M4 Pro (14‑core)</cpu>
+            <gpu>Apple GPU</gpu>
+            <ram>48GB</ram>
+            <storage>512GB SSD</storage>
+            <display>16" Liquid Retina XDR</display>
+            <os>macOS</os>
+        </specificatii>
+    </laptop>
+    <laptop href="/laptop-lenovo-loq-15-irx10-i7-13650hx-24gb-1tb" src="laptop_icons/lenovo-loq-15-irx10.png" nume="Lenovo LOQ 15 IRX10">
+        <specificatii>
+            <motherboard>ASRock Z790 Taichi</motherboard>
+            <cpu>Intel Core i7‑13650HX</cpu>
+            <gpu>NVIDIA GeForce RTX 5060</gpu>
+            <ram>24GB</ram>
+            <storage>1TB SSD</storage>
+            <display>15.6" FHD IPS 144Hz</display>
+            <os>No OS</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-hp-victus-15-fb1107nq-ryzen-5-7535hs-16gb-1tb" src="laptop_icons/hp-victus-15.png" nume="HP Victus 15">
+        <specificatii>
+            <motherboard>ASUS ROG Strix Z790-E Gaming</motherboard>
+            <cpu>AMD Ryzen 5 7535HS</cpu>
+            <gpu>NVIDIA GeForce RTX 2050</gpu>
+            <ram>16GB</ram>
+            <storage>1TB SSD</storage>
+            <display>15.6" FHD IPS 144Hz</display>
+            <os>Free DOS</os>
+        </specificatii>
+    </laptop>
+
+    <laptop href="/laptop-acer-nitro-v-15-anv15‑51-i5-13420h-16gb-512gb" src="laptop_icons/acer-nitro-v-15.png" nume="Acer Nitro V 15 (ANV15‑51)">
+        <specificatii>
+            <motherboard>Gigabyte B760M AORUS Elite AX</motherboard>
+            <cpu>Intel Core i5‑13420H</cpu>
+            <gpu>NVIDIA GeForce RTX 3050</gpu>
+            <ram>16GB</ram>
+            <storage>512GB SSD</storage>
+            <display>15.6" FHD IPS 144Hz</display>
+            <os>No OS</os>
+        </specificatii>
+    </laptop>
+    <laptop href="/laptop-lenovo-ideapad-slim-3-15abr8-ryzen-7-5825u-16gb-512gb" src="laptop_icons/lenovo-ideapad-slim-3-15.png" nume="Lenovo IdeaPad Slim 3 15ABR8">
+        <specificatii>
+            <motherboard>MSI MAG B760 Tomahawk WiFi DDR4</motherboard>
+            <cpu>AMD Ryzen 7 5825U</cpu>
+            <gpu>AMD Radeon Graphics</gpu>
+            <ram>16GB</ram>
+            <storage>512GB SSD</storage>
+            <display>15.6" FHD IPS</display>
+            <os>No OS</os>
+        </specificatii>
+    </laptop>
+
+</root>
+
+
+

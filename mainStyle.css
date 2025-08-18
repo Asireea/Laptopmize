@@ -1,0 +1,467 @@
+/* ------------------ GLOBAL ------------------ */
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/* ------------------ NAVIGATION BAR ------------------ */
+
+.navBar {
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+}
+
+.navBar li img {
+    display: inline-block;
+    height: 70px;
+}
+
+nav {
+    padding-top: 5px;
+    position: fixed;
+    background-color: #D0F0FD;
+    width: 100%;
+    border: 2px solid #1595EF;
+    border-radius: 0 0 12px 12px; 
+    box-shadow: 0 4px 12px rgba(21, 149, 239, 0.1);
+    transition: width 0.3s ease;
+}
+
+.navBar a {
+    margin: 0 50px 0 50px;
+    text-decoration: none;
+}
+
+.cart-link {
+    position: relative;
+    display: inline-block;
+}
+
+.counterDot {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden; /* Hidden when no items */
+}
+
+
+
+/* ------------------ END OF NAVIGATION BAR ------------------ */
+
+#leftAndMain {
+    width: 70%;
+    display: flex;
+}
+
+/* ------------------ LAPTOP CARDS DISPLAY ------------------ */
+
+#leftContainerLaptopuri {
+    width: 30%;
+    
+}
+
+/* ------------------ INDIVIDUAL LAPTOP CARD ------------------ */
+.laptopCardClass {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ------------------ LAPTOP CARD IMAGE ------------------ */
+.laptopCardClass img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+/* ------------------ LAPTOP CARD SPECS LIST ------------------ */
+.laptopCardClass ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.laptopCardClass li {
+    font-size: 0.95rem;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.laptopCardClass li strong {
+    color: #444;
+}
+
+.laptopCardClass li > strong::after{
+    content: " ";
+} 
+
+/* ------------------ SPECIFICATIONS LIST FROM SPECS PAGE ------------------ */
+
+.laptopPage {
+    width: 78%;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    transition: width 0.3s ease;
+}
+
+#laptopSpecsContainer {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+#laptopSpecsContainer ul {
+    width: 80%;
+    list-style: none; /* Remove bullets */
+    padding: 0;
+    margin-left: 5px;
+    margin-top: 1px;
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    
+}
+
+#laptopSpecsContainer li {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    overflow: hidden;
+}
+
+#laptopSpecsContainer li::after {
+    clear: both;
+}
+
+#laptopSpecsContainer li strong {
+    display: inline-block;
+    color: #333;
+}
+
+#laptopSpecsContainer li > strong::after{
+    content: "\00a0";
+} 
+
+.containerOfHolders {
+    float: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hideHolder {
+    display: none !important;
+}
+
+.holderContainer {
+    padding-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.holder {
+    width: 100px;
+    height: 50px;
+    background-color: #eaeaea;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: red;
+}
+
+.cancelButton {
+    margin-left: 15px;
+    /*background-color: red;*/
+    background-color: #e0e0e0;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+/* ------------------ SPECS PAGE LAPTOP IMAGE ------------------ */
+
+.mainLaptopIcon {
+    width: 20%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+/*
+.specsContainerLaptopImgWrapper {
+    width: 40%;
+    height: auto;
+}
+
+.specsContainerLaptopImgWrapper .mainLaptopIcon {
+    width: 50%;
+    object-fit: contain;
+}
+
+*/
+
+.mainLaptopIconGhost{
+    position: absolute;
+}
+/* ------------------ SPECS PAGE BUTTONS CONTAINER ------------------ */
+.specsPageButtonsContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* ------------------ ADD TO CART BUTTON ------------------ */
+.addToCartButton{
+    align-items: center;
+    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 20px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.addToCartButton:active,
+.addToCartButton:hover {
+    outline: 0;
+}
+
+.addToCartButton span {
+    background-color: rgb(5, 6, 45);
+    padding: 16px 24px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+}
+
+.addToCartButton:hover span {
+    background: none;
+}
+
+@media (min-width: 768px) {
+    .addToCartButton {
+    font-size: 24px;
+    min-width: 196px;
+    }
+}
+
+/* ------------------ CUSTOMIZE LAPTOP BUTTON ------------------ */
+.customizeButton{
+    margin: 10px;
+    padding: 15px 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px;
+    display: block;
+    border: 0px;
+    font-weight: 700;
+    box-shadow: 0px 0px 14px -7px #f09819;
+    background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.customizeButton:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+.customizeButton:active {
+    transform: scale(0.95);
+}
+
+/* ------------------ CUSTOMIZATIONS SIDE BAR ------------------ */
+.sideBar {
+    position: fixed;
+    top: 0;
+    right: -30%; /* Hidden off-screen */
+    width: 30%;
+    height: 100%;
+    background-color: #f1f1f1;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+}
+
+/* When visible */
+.sidebarVisible {
+  right: 0; /* Slide into view */
+}
+
+.laptopSpecsPageSidebarOpen {
+    width: 48%;
+    padding-right: 10px;
+}
+
+.sidebarCloser {
+    /*position: absolute;*/
+    width: 10%;
+    cursor: pointer; /* Makes it look clickable */
+}
+
+.navigationBarSidebarOpen {
+    width: 70%;
+}
+
+/* ------------------ CUSTOMIZATIONS ELEMENTS ------------------ */
+
+.menu-title {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+.downArrow {
+    width: 16px;
+    height: 16px;
+}
+
+/* Component image styling */
+.componentImage {
+    width: 100%;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    transition: transform 0.2s ease;
+}
+
+/* Hover effect */
+.componentImage:hover {
+    transform: scale(1.05);
+}
+
+/* unavailable effect */
+.unavailableComponent 
+{
+    filter: grayscale(0.5);
+    opacity: 50%;
+}
+
+.droppedImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.submenu {
+    display: none;
+    grid-template-columns: 150px 1fr;
+    gap: 20px;
+    padding: 10px;
+    align-items: center;
+    /*overflow: hidden;
+    height: 0;*/
+}
+
+.active .submenu {
+    display: grid;
+
+}
+
+
+
+.tooltip-content {
+    width: 100%;
+    margin-top: -5px; 
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    min-width: 200px;
+    font-size: 13px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Show tooltip when image is hovered 
+.componentImage:hover + .tooltip-content {
+    display: block;
+}
+*/
+.tooltip-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tooltip-content li {
+    padding: 6px 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.tooltip-content li:last-child {
+    border-bottom: none;
+}
