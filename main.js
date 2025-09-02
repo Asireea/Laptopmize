@@ -1,15 +1,18 @@
-// ---------------------- CONSTANTS ---------------------- //
-// padding constant used when calculating layout dimensions
-const topLeftAndMainPadding = 10;
-// padding constant used for adding padding to the left between
-// laptop cards and laptop specs page
-const leftPadding = 10;
-// number of elements in the shopping cart
-let cartCount = 0;
 
 //const HTTP_HOST = "http://localhost/laptopmize";
-const HTTP_HOST = "http://laptopmize.asireea.com";
+//const HTTP_HOST = "http://laptopmize.asireea.com";
 
+let customComponents = [];
+
+// center coords of image
+let centerX, centerY;
+
+// variables used to handle XML files where:
+// data -> dataLeftAndMain.xml
+// struct -> structLeftAndMain.xml
+// dataSideBar -> dataComponents.xml
+// structSideBar -> structComponents.xml
+let data, struct, dataSideBar, structSideBar;
 
 // ------------------ PAGE LAYOUT UTILITY ------------------ //
 
@@ -21,6 +24,7 @@ const HTTP_HOST = "http://laptopmize.asireea.com";
 
 // ----------------- XML LOADER FOR LAPTOP CARDS AND SPECS MENU ----------------- //
 // ----------------- XML LOADER FOR CUSTOMIZATION MENU ----------------- //
+
 
 // load the xml files for laptop cards and specs menu
 Promise.all([
@@ -35,12 +39,12 @@ Promise.all([
   const parser = new DOMParser();
 
   // Parse XML strings into DOM structures for the left and specs pages
-  const data = parser.parseFromString(dataXml, "application/xml");
-  const struct = parser.parseFromString(structXml, "application/xml");
+  data = parser.parseFromString(dataXml, "application/xml");
+  struct = parser.parseFromString(structXml, "application/xml");
   
   // Parse XML strings into DOM structures for the side bar page
-  const dataSideBar = parser.parseFromString(dataSideBarXml, "application/xml");
-  const structSideBar = parser.parseFromString(structSideBarXml, "application/xml");
+  dataSideBar = parser.parseFromString(dataSideBarXml, "application/xml");
+  structSideBar = parser.parseFromString(structSideBarXml, "application/xml");
   
   // Get the laptop section structure template from struct XML
   let concreteParentIterator = struct.querySelector('[data-js-parent-iterator="laptop"]');
@@ -103,7 +107,7 @@ Promise.all([
                 renderLaptopSpecs(targetHref, data, struct, compatibilitiesJson);
                 renderSpecsPageButtons(struct);
                 moveLaptopToCart();
-                toggleSideBar();
+                //toggleSideBar();
                 
             });//end-event-listener
         });// end forEach (for the selectedA)
@@ -118,7 +122,7 @@ Promise.all([
     renderLaptopSpecs(laptopLinkHref, data, struct, compatibilitiesJson);
     renderSpecsPageButtons(struct);
     moveLaptopToCart();
-    toggleSideBar();
+    //toggleSideBar();
   } 
 
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <section class="itemBox">
+        <img class="imgLaptop"/>
+        <ul class="specsUl">
+            <li>
+                <strong data-js-innerText="key"></strong>
+                <span data-js-innerText="value"></span>
+            </li>
+        </ul>
+        <div class="rightSideButtonsContainer">
+            <div class="cancelOrderButton">X</div>
+            <div class="counterContainer">
+                <div class="lessButton">-</div>
+                <div class="countDisplay"></div>
+                <div class="moreButton">+</div>
+                
+            </div>
+        </div>
+    </section>
+</root>

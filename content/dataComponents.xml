@@ -1,31 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root>
-    <motherboards>
-        <MOTHERBOARD src="components/Apple-MSI-MEG-X670E-ACE.jpg" nume="Apple MSI MEG X670E ACE">
-            <specificatii>
-                <Socket>Apple</Socket>
-                <MemorySupport>4× DDR5 DIMM slots</MemorySupport>
-                <Networking>Wi-Fi 6E</Networking>
-                <Bluetooth>Bluetooth 5.3</Bluetooth>
-                <Storage>2× M.2 slots</Storage>
-            </specificatii>
-        </MOTHERBOARD>
-
-        <MOTHERBOARD src="components/ASUS-ROG-Strix-Z790-E-Gaming.jpg" nume="ASUS ROG Strix Z790-E Gaming">
-            <specificatii>
-                <Socket>AMD</Socket>
-                <MemorySupport>2× DDR5 DIMM slots</MemorySupport>
-                <Networking>Wireless: Intel Wi‑Fi 6E &amp; Ethernet: 2.5 Gb Intel LAN</Networking>
-                <Bluetooth>X</Bluetooth>
-                <Storage>4× SATA 6 Gb/s ports</Storage>
-            </specificatii>
-        </MOTHERBOARD>
-    </motherboards>
-
     <processors>
         <CPU src="components/AMD-Ryzen-5-3600.jpg" nume="AMD Ryzen 5 3600">
             <specificatii>
+                <Price>169</Price>
                 <Freqency>3.6 GHz</Freqency>
                 <NumberOfCores>6</NumberOfCores>
                 <NumberOfThreads>12</NumberOfThreads>
@@ -34,6 +13,7 @@
 
         <CPU src="components/AMD-Ryzen-7-7700.jpg" nume="AMD Ryzen 7 7700">
             <specificatii>
+                <Price>349</Price>
                 <Freqency>3.8 GHz</Freqency>
                 <NumberOfCores>8</NumberOfCores>
                 <NumberOfThreads>16</NumberOfThreads>
@@ -43,6 +23,7 @@
 
         <CPU src="components/Apple-M4-(10‑core).jpg" nume="Apple M4 (10‑core)">
             <specificatii>
+                <Price>499</Price>
                 <Freqency>4.4 GHz</Freqency>
                 <Graphics>Built-in GPU</Graphics>
                 <PowerConsumption>~22 W nominal, ~40 W peak</PowerConsumption>
@@ -51,6 +32,7 @@
 
         <CPU src="components/Intel-Xeon-W-3223.jpg" nume="Intel Xeon W-3223">
             <specificatii>
+                <Price>999</Price>
                 <NumberOfCores>8</NumberOfCores>
                 <NumberOfThreads>16</NumberOfThreads>
                 <Freqency>3.50 GHz</Freqency>
@@ -61,6 +43,7 @@
     <graphicsCards>
         <GPU src="components/AMD-Radeon-RX-9060-XT.jpg" nume="AMD Radeon RX 9060 XT">
             <specificatii>
+                <Price>899</Price>
                 <Freqency>2530 MHz</Freqency>
                 <MemorySize>16 GB</MemorySize>
                 <MemoryType>GDDR6</MemoryType>
@@ -69,6 +52,7 @@
 
         <GPU src="components/AMD-Radeon-7800-XT.jpg" nume="AMD Radeon 7800 XT">
             <specificatii>
+                <Price>599</Price>
                 <Freqency>2124 MHz</Freqency>
                 <MemorySize>16 GB</MemorySize>
                 <MemoryType>DDR6</MemoryType>
@@ -79,6 +63,7 @@
 
         <GPU src="components/Apple-M4-GPU-(10‑core).jpg" nume="Apple M4 GPU (10‑core)">
             <specificatii>
+                <Price>399</Price>
                 <ClockSpeeds>Base ~500 MHz, Boost ~1700–1800 MHz</ClockSpeeds>
                 <MemoryBandwidth>120 GB/s</MemoryBandwidth>
                 <Features>Ray tracing, mesh shading, dynamic caching</Features>
@@ -86,4 +71,192 @@
         </GPU>
     </graphicsCards>
 
+    <ramSticks>
+        <RAM src="components/Kingston-Fury-Beast-16GB-DDR5.jpg" nume="Kingston Fury Beast 16GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>69</Price>
+                <Capacity>16GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/Kingston-Fury-Beast-8GB-DDR5.jpg" nume="Kingston Fury Beast 8GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>39</Price>
+                <Capacity>8GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+        
+        <RAM src="components/Patriot-Viper-Venom-32GB-DDR5.jpg" nume="Patriot Viper Venom 32GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>199</Price>
+                <Capacity>32GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6200 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/Patriot-Viper-Venom-16GB-DDR5.jpg" nume="Patriot Viper Venom 16GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>119</Price>
+                <Capacity>16GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6200 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/Silicon-Power-Zenith-32GB-DDR5.jpg" nume="Silicon Power Zenith 32GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>129</Price>
+                <Capacity>32GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/Teamgroup-T-Create-Expert-Overclocking-32GB-DDR5.jpg" nume="Teamgroup T-Create Expert Overclocking 32GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>109</Price>
+                <Capacity>32GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/Silicon-Power-Zenith-64GB-DDR5.jpg" nume="Silicon Power Zenith 64GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>199</Price>
+                <Capacity>64GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+        
+        <RAM src="components/Corsair-VENGEANCE-32GB-DDR5.jpg" nume="Corsair VENGEANCE 32GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>124</Price>
+                <Capacity>32GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/Corsair-VENGEANCE-64GB-DDR5.jpg" nume="Corsair VENGEANCE 64GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>149</Price>
+                <Capacity>64GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6400 MHz</Frequency>
+            </specificatii>
+        </RAM>
+        
+    </ramSticks>
+
+    <storageUnits>
+        <STORAGE src="components/Apple-proprietary-SSD-blade-256GB.jpg" nume="Apple proprietary SSD blade 256GB">
+            <specificatii>
+                <Price>179</Price>
+                <Capacity>256GB</Capacity>
+                <WriteSpeed>5100 MB/s</WriteSpeed>
+                <ReadSpeed>7000 MB/s</ReadSpeed>
+            </specificatii>
+        </STORAGE>
+
+        <STORAGE src="components/SSD-Samsung-990-PRO-1TB.jpg" nume="SSD Samsung 990 PRO 1TB">
+            <specificatii>
+                <Price>139</Price>
+                <Capacity>1TB</Capacity>
+                <WriteSpeed>6900 MB/s</WriteSpeed>
+                <ReadSpeed>7450 MB/s</ReadSpeed>
+            </specificatii>
+        </STORAGE>
+
+        <STORAGE src="components/SSD-MacBook-Pro-OWC-Aura-Pro-X2-1-NVMe.jpg" nume="SSD MacBook Pro OWC Aura Pro X2 1.0TB NVMe">
+            <specificatii>
+                <Price>249</Price>
+                <Capacity>1TB</Capacity>
+                <WriteSpeed>2445 MB/s</WriteSpeed>
+                <ReadSpeed>3230 MB/s</ReadSpeed>
+                <ControllerType>NVMe</ControllerType>
+            </specificatii>
+        </STORAGE>
+
+        <STORAGE src="components/Apple-OEM-SSD-1TB.jpg" nume="Apple OEM SSD 1TB">
+            <specificatii>
+                <Price>299</Price>
+                <Capacity>1TB</Capacity>
+                <WriteSpeed>2222 MB/s</WriteSpeed>
+                <ReadSpeed>3700 MB/s</ReadSpeed>
+            </specificatii>
+        </STORAGE>
+
+        <STORAGE src="components/Samsung-870-EVO-1TB.jpg" nume="Samsung 870 EVO 1TB">
+            <specificatii>
+                <Price>89</Price>
+                <Capacity>1TB</Capacity>
+                <WriteSpeed>7200 MB/s</WriteSpeed>
+                <ReadSpeed>7500 MB/s</ReadSpeed>
+            </specificatii>
+        </STORAGE>
+    </storageUnits>
+    
+    <OSes>
+        <OS src="components/windows-11.jpg" nume="Windows 11">
+            <specificatii>
+                <Price>199</Price>
+                <Name>Windows 11</Name>
+                <ReleaseYear>2021</ReleaseYear>
+                <TargetAudience>General users, gamers, professionals</TargetAudience>
+                <EaseOfUse>Very easy</EaseOfUse>
+                <SystemRequirements>Higher (requires TPM 2.0, Secure Boot)</SystemRequirements>
+            </specificatii>
+        </OS>
+
+        <OS src="components/windows-10.jpg" nume="Windows 10">
+            <specificatii>
+                <Price>119</Price>
+                <Name>Windows 10</Name>
+                <ReleaseYear>2015</ReleaseYear>
+                <TargetAudience>General users, businesses</TargetAudience>
+                <EaseOfUse>Very easy</EaseOfUse>
+                <SystemRequirements>Moderate (1 GHz CPU, 2 GB RAM, no TPM/Secure Boot required)</SystemRequirements>
+            </specificatii>
+        </OS>
+
+        <OS src="components/ubuntu.jpg" nume="Ubuntu">
+            <specificatii>
+                <Price>0</Price>
+                <Name>Ubuntu</Name>
+                <ReleaseYear>2004</ReleaseYear>
+                <TargetAudience>General users, developers, Linux beginners</TargetAudience>
+                <EaseOfUse>Easy to moderate</EaseOfUse>
+                <SystemRequirements>Low to moderate</SystemRequirements>
+            </specificatii>
+        </OS>
+
+        <OS src="components/arch-linux.jpg" nume="Arch Linux">
+            <specificatii>
+                <Price>0</Price>
+                <Name>Arch Linux</Name>
+                <ReleaseYear>2002</ReleaseYear>
+                <TargetAudience>Advanced Linux users, tinkerers, developers</TargetAudience>
+                <EaseOfUse>Hard (requires CLI knowledge)</EaseOfUse>
+                <SystemRequirements>Very low</SystemRequirements>
+            </specificatii>
+        </OS>
+
+        <OS src="components/macOS.jpg" nume="macOS">
+            <specificatii>
+                <Price>199</Price>
+                <Name>macOS</Name>
+                <ReleaseYear>2001</ReleaseYear>
+                <TargetAudience>Creatives, professionals, general users</TargetAudience>
+                <EaseOfUse>Very easy, intuitive</EaseOfUse>
+                <SystemRequirements>High (Apple Silicon or recent Intel Macs)</SystemRequirements>
+            </specificatii>
+        </OS>
+    </OSes>
 </root>

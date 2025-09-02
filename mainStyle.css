@@ -121,6 +121,13 @@ nav {
     content: " ";
 } 
 
+.priceLi {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 1.2rem !important;
+    font-weight: bold;
+    color: #2c7be5; 
+}
+
 /* ------------------ SPECIFICATIONS LIST FROM SPECS PAGE ------------------ */
 
 .laptopPage {
@@ -252,6 +259,24 @@ nav {
     justify-content: flex-end;
     width: 100%;
 }
+
+/* ------------------ PRICE DISPLAY BOX ------------------ */
+
+.priceDisplayBox {
+    display: inline-block;
+    background: #fff;
+    border: 2px solid #4f51d4;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    
+}
+
+
 
 /* ------------------ ADD TO CART BUTTON ------------------ */
 .addToCartButton{
@@ -464,4 +489,162 @@ nav {
 
 .tooltip-content li:last-child {
     border-bottom: none;
+}
+
+
+/* ------------------------------- SHOPPING CART PAGE ------------------------------- */
+
+.itemBox {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    background-color: #f9f9f9;   /* lighter background for card */
+    gap: 15px;
+    padding: 20px;
+    margin: 15px auto;           /* centers horizontally */
+    justify-content: space-between;
+    align-items: center;
+    
+    /* Card styling */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow */
+    border: 1px solid #e0e0e0;  /* thin border for definition */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.imgLaptop {
+    width: 20%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.specsUl {
+    width: 70%;
+    list-style: none; /* Remove bullets */
+    padding: 0;
+    margin-left: 5px;
+    margin-top: 1px;
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+
+.specsUl li {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    overflow: hidden;
+}
+
+.specsUl li::after {
+    clear: both;
+}
+
+.specsUl li strong {
+    display: inline-block;
+    color: #333;
+}
+
+.specsUl li > strong::after{
+    content: "\00a0";
+} 
+
+.rightSideButtonsContainer {
+    width: 10%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cancelOrderButton {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    background: #fbeaea;                   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1;
+    color: #d32f2f;
+    box-shadow: inset 0 0 0 1px #f2c5c5; /* subtle red ring */
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.cancelOrderButton:hover {
+    background: #f8dada;
+}
+
+.cancelOrderButton:active {
+    transform: scale(0.95);
+}
+
+
+.counterContainer {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: #f3f3f3;
+    border: 1px solid #e7e7e7;
+    border-radius: 6px;
+    user-select: none;
+}
+
+/* Make elements look like circular buttons */
+.counterContainer .moreButton,
+.counterContainer .lessButton {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    background: #e6e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 1;
+    box-shadow: inset 0 0 0 1px #dddddd;  /* subtle ring */
+    cursor: pointer;
+}
+
+/* Minus looks disabled */
+.counterContainer .lessButton {
+    color: #b7b7b7;
+    cursor: default;
+}
+
+/* Plus is darker */
+.counterContainer .moreButton {
+    color: #111;
+}
+
+/* Button look subtly darker when hovered */
+.counterContainer .moreButton:hover { 
+    filter: brightness(0.97); 
+}
+
+/* Number in the middle */
+.counterContainer .countDisplay {
+    min-width: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+}
+
+.canvasHTML 
+{
+    display: block;
 }

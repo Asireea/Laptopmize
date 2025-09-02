@@ -17,7 +17,7 @@
   <section id="laptopSpecsPage" class="laptopPage">
 
     <div id="laptopSpecsContainer"> 
-      <img class="mainLaptopIcon" data-js-attributes="src"/>
+      <img class="mainLaptopIcon" data-js-attributes="src nume"/>
       <ul data-js-iterator="specificatii">
         <li><strong data-js-item-iterator="innerText"></strong></li>
       </ul>

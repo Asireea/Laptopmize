@@ -700,7 +700,7 @@ function addHolderContainer(iteratedElement, numberOfHolders)
 
     holder.classList.add("holder"); 
     holder.setAttribute("data-id", "holder");
-    holder.setAttribute("ondrop", "dropHandler(event)");
+    holder.setAttribute("ondrop", "dropHandler(event, data, dataSideBar)");
     holder.setAttribute("ondragover", "dragoverHandler(event)");
 
     // create a new span element to act as a "cancel" button
@@ -773,13 +773,13 @@ function dragoverHandler(ev) {
     
 }
 
-function dropHandler(ev) {
+function dropHandler(ev, dataLaptop, dataSideBar) {
     ev.preventDefault();
     const data = ev.dataTransfer.getData("text");
 
     // select the container of the holder element
     let holderContainer = ev.currentTarget.parentElement;
-    
+
 
     // select the whole li element
     let specContainer = holderContainer.parentElement.parentElement;
@@ -818,7 +818,7 @@ function dropHandler(ev) {
 
 
     // -------------------- handle price changes --------------------
-
+/*
     let priceLi = Array.from(draggedElement.nextElementSibling.querySelectorAll("li")).find(li => {
         let strong = li.querySelector("strong");
         return strong && strong.textContent.trim() === "Price:";
@@ -833,14 +833,19 @@ function dropHandler(ev) {
     // get the price of the initial component that the laptop had
     let initialComponentPrice = parseFloat(specContainer.getAttribute("price"));
 
+*/
 
     let priceDisplayBox = document.querySelector(".priceDisplayBox");
 
-    let newTotalPrice = parseFloat(priceDisplayBox.textContent.match(/\d+/)[0]);
+
+    //let currentLaptop = getCurrentLaptopByHref(dataLaptop);
+    //let specs = currentLaptop.querySelector("specificatii");
+    
+    //let newTotalPrice;
 
     // ---------- STYLE VISUAL ELEMENTS ON DROP ----------
 
-    document.querySelector(".priceDisplayBox").textContent = "Price: " + newTotalPrice + " \u20AC";
+    //document.querySelector(".priceDisplayBox").textContent = "Price: " + newTotalPrice + " \u20AC";
     
     if(specContainer.querySelectorAll(".holderContainer").length > 1)
     {
@@ -848,12 +853,17 @@ function dropHandler(ev) {
         if(specContainerSpan.innerHTML == specContainerSpan.getAttribute("data-initial"))
         {
             specContainerSpan.innerHTML = data;
-            newTotalPrice = newTotalPrice - initialComponentPrice + priceOfDroppedElement;
+
+            //totalLaptopPrice = handlePriceChanges(totalLaptopPrice, specContainer, draggedElement, false, false, dataLaptop, dataSideBar);
+
+            //newTotalPrice = newTotalPrice - initialComponentPrice + priceOfDroppedElement;
         }
         else
         {
             specContainerSpan.innerHTML += ", " + data;
-            newTotalPrice = newTotalPrice + priceOfDroppedElement;
+
+            //totalLaptopPrice = handlePriceChanges(totalLaptopPrice, specContainer, draggedElement, false, true, dataLaptop, dataSideBar);
+            //newTotalPrice = newTotalPrice + priceOfDroppedElement;
         }
         //specContainer.querySelector("span").innerHTML += ", " + data;
     }
@@ -863,12 +873,17 @@ function dropHandler(ev) {
         // name of the specified spec
         // and update it to the dropped spec name
         specContainerSpan.innerHTML = data;
+
+        //totalLaptopPrice = handlePriceChanges(totalLaptopPrice, specContainer, draggedElement, false, false, dataLaptop, dataSideBar);
         
-        newTotalPrice = newTotalPrice - initialComponentPrice + priceOfDroppedElement;
+        //newTotalPrice = newTotalPrice - initialComponentPrice + priceOfDroppedElement;
     }
     
+    let totalLaptopPrice = calcUpdatedPrice(dataLaptop, dataSideBar);
+
+    console.log("total laptop price in drophandler " + totalLaptopPrice);
     // update the price in the price display box
-    priceDisplayBox.textContent = "Price: " + newTotalPrice + " \u20AC";
+    priceDisplayBox.textContent = "Price: " + totalLaptopPrice + " \u20AC";
 
 
     // --------------------------- HANDLE CANCEL LOGIC    ---------------------------
@@ -891,8 +906,6 @@ function dropHandler(ev) {
         if(holderContainer.querySelector(".holder").firstChild)
         {
 
-            newTotalPrice = parseFloat(priceDisplayBox.textContent.match(/\d+/)[0]);
-
             if(specContainer.querySelectorAll(".holderContainer").length > 1)
             {
                 // get the data-id (value of the component) of the dropped image clone
@@ -910,9 +923,11 @@ function dropHandler(ev) {
                                                 .replace(/\s+/g, " ")       // collapse spaces
                                                 .trim();                    // trim edges
 
-                let droppedCompPrice = parseFloat(cancelButton.parentElement.querySelector(".droppedImg").getAttribute("price"));
+                //let droppedCompPrice = parseFloat(cancelButton.parentElement.querySelector(".droppedImg").getAttribute("price"));
 
-                newTotalPrice = newTotalPrice - droppedCompPrice;
+                //newTotalPrice = newTotalPrice - droppedCompPrice;
+                
+                
                 
                 if(specContainerSpan.innerText == "")
                 {
@@ -920,9 +935,13 @@ function dropHandler(ev) {
                     let intialValue = specContainerSpan.getAttribute("data-initial");
                     specContainerSpan.innerHTML = intialValue;
 
-                    newTotalPrice = newTotalPrice + parseFloat(specContainer.getAttribute("price"));
+                    //newTotalPrice = newTotalPrice + parseFloat(specContainer.getAttribute("price"));
+
 
                     removeFromCustomComponents(specTypeInContainer.substring(0, specTypeInContainer.length - 1).trim().toLowerCase());
+                }
+                else
+                {
                 }
             }
             else if(specContainer.querySelectorAll(".holderContainer").length == 1)
@@ -931,11 +950,11 @@ function dropHandler(ev) {
                 let intialValue = specContainer.querySelector("span").getAttribute("data-initial");
                 specContainer.querySelector("span").innerHTML = intialValue;
 
-                let droppedCompPrice = parseFloat(cancelButton.parentElement.querySelector(".droppedImg").getAttribute("price"));
+                //let droppedCompPrice = parseFloat(cancelButton.parentElement.querySelector(".droppedImg").getAttribute("price"));
 
-                let initCompPrice = parseFloat(specContainer.getAttribute("price"));
+                //let initCompPrice = parseFloat(specContainer.getAttribute("price"));
 
-                newTotalPrice = newTotalPrice - droppedCompPrice + initCompPrice;
+                //newTotalPrice = newTotalPrice - droppedCompPrice + initCompPrice;
 
                 removeFromCustomComponents(specTypeInContainer.substring(0, specTypeInContainer.length - 1).trim().toLowerCase());
             }
@@ -943,7 +962,10 @@ function dropHandler(ev) {
             // remove the dropped img
             holderContainer.querySelector(".holder").firstChild.remove();
 
-            priceDisplayBox.textContent = "Price: " + newTotalPrice + " \u20AC";
+            totalLaptopPrice = calcUpdatedPrice(dataLaptop, dataSideBar);
+            console.log("total price in cancel " + totalLaptopPrice); 
+
+            priceDisplayBox.textContent = "Price: " + totalLaptopPrice + " \u20AC";
         }
 
         // make the cancel button seem inactive again by giving it a grey background color
@@ -1224,32 +1246,175 @@ function calcTotalPrice(item)
     return totalPrice;
 }
 
-
-function handlePriceChanges(initialComp, droppedComp)
+function handleLaptopChanges(item, )
 {
-    let droppedCompLis = droppedComp.nextElementSibling.querySelectorAll("li");
+    let currentLaptop = getCurrentLaptopByHref(dataLaptopsXml);
+    let dataCustomComponentsXml = dataSideBar;
+}
 
-    let priceLi = Array.from(droppedCompLis).find(li => {
-        let strong = li.querySelector("strong");
-        return strong && strong.textContent.trim() === "Price:";
+
+function getCurrentLaptopByHref(dataLaptopsXml)
+{
+    // extract the identifier of product from the URL
+    // Example: https://example.com/laptop-lenovo-ideapad-slim-5-14irh10-i5-13420h-32gb-1tb
+
+    const pathParts = window.location.pathname.split("/");
+    const productLink = pathParts[pathParts.length - 1]; // laptop-lenovo-ideapad-slim-5-14irh10-i5-13420h-32gb-1tb
+
+    let dataLaptop;
+
+    dataLaptopsXml.querySelectorAll("laptop").forEach(laptop => {
+        let laptopHref = laptop.getAttribute("href");
+
+        if(laptopHref.substring(1) == productLink)
+        {
+            dataLaptop = laptop;
+            return;
+        }
+
     });
 
-    // get the price of the dropped compoenent
-    let priceOfDroppedElement = parseFloat(priceLi.querySelector("span").textContent);
+    return dataLaptop;
+    
+}
 
-    // get the price of the initial component that the laptop had
-    let initialComponentPrice = parseFloat(initialComp.getAttribute("price"));
+function getCurrentCustomization(dataCustomComponentsXml, droppedComp)
+{
+    let dataCustomization;
+
+    let sections = dataCustomComponentsXml.querySelector("root").children;
+
+    for (let i = 0; i < sections.length; i++)
+    {
+        let sectionTag = sections[i].tagName;
+
+        let nodeList = dataSideBar.querySelectorAll(`${sectionTag} > *`);
+
+        nodeList.forEach(item => {
+            let itemName = item.getAttribute("nume");
+            if(itemName == droppedComp.getAttribute("data-id"))
+            {
+                dataCustomization = item;
+                return;
+            }
+        });
+    }
+
+    return dataCustomization;
+}
 
 
+/*
+case 1: the <li> element has only one holder and holder is empty
+case 2: the <li> element has only one holder and holder has an image
+case 3: the <li> element has more holders and all are empty
+case 4: the <li> element has more holders and at least one has an image
+case 4: the <li> element has no holders
+*/
 
-    let priceDisplayBox = document.querySelector(".priceDisplayBox");
+function calcUpdatedPrice(dataLaptop, dataCustomComponentsXml)
+{
+    let currentLaptop = getCurrentLaptopByHref(dataLaptop);
 
-    let totalLaptopPrice = parseFloat(priceDisplayBox.textContent.match(/\d+/)[0]);
+    let totalLaptopPrice = 0;
 
+    // iterate through each li element of the specs page ul
+    document.querySelectorAll("#laptopSpecsContainer ul li").forEach(liElement =>
+    {
+        // case 1 & 2: the current <li> has one holder
+        if(liElement.querySelectorAll(".holder").length == 1)
+        {
+            // case 2: the holder has one droppedImg child
+            // check if the current holder contains children in order to determine 
+            // if it contains at least one image
+            if(liElement.querySelector(".holder").children.length > 0)
+            {
+                // select the child droppedImg
+                let childImg = liElement.querySelector(".droppedImg");
 
-    // calculate 
-    totalLaptopPrice = totalLaptopPrice - initialComponentPrice + priceOfDroppedElement;
+                // select the current customization by looking at the dropped image, against the components XML
+                let currentCustomization = getCurrentCustomization(dataCustomComponentsXml, childImg);
+                // get tthe price of the customization from XML
+                let currentCustomizationPrice = parseFloat(currentCustomization.querySelector("Price").textContent);
+                // increment the total laptop price
+                totalLaptopPrice += currentCustomizationPrice;
+            } // end if(liElement.querySelector(".holder").children.length > 0)
+
+            // case 1: the holder is empty
+            // use initial comp for the price
+            else
+            {
+                // select the component name (e.g. "CPU", "GPU", "Motherboard" etc.) from the li element
+                let specTypeInContainer = liElement.querySelector("strong").innerHTML;
+                // clean up the spec type from html
+                let cleanSpecType = specTypeInContainer.substring(0, specTypeInContainer.length - 1).trim().toLowerCase();
+                // get the price of the initial component
+                let initialCompPrice = parseFloat(currentLaptop.querySelector(cleanSpecType).getAttribute("price"));
+
+                // increment the total price
+                totalLaptopPrice += initialCompPrice;
+            } // end else
+        } // end if(liElement.querySelectorAll(".holder").length == 1)
+        
+        // case 3 & 4: the current <li> has more holders
+        else if(liElement.querySelectorAll(".holder").length > 1)
+        {
+            let hasAtLeastOneCustomization = false;
+            // iterate through each holder if the current <li> element
+            liElement.querySelectorAll(".holder").forEach(holder => {
+                // case 4: multiple holders but at least one has an img
+                // check if the holder contains one droppedImg
+                if(holder.querySelector(".droppedImg"))
+                {
+                    hasAtLeastOneCustomization = true;
+                    // select the child droppedImg
+                    let childImg = holder.querySelector(".droppedImg");
+
+                    // select the current customization by looking at the dropped image, against the components XML
+                    let currentCustomization = getCurrentCustomization(dataCustomComponentsXml, childImg);
+                    // get tthe price of the customization from XML
+                    let currentCustomizationPrice = parseFloat(currentCustomization.querySelector("Price").textContent);
+                    // increment the total laptop price
+                    totalLaptopPrice += currentCustomizationPrice;
+                }
+            }); // end for each holder
+
+            // case 3: multiple holder but all are empty
+            // total will be the price of the inital component only once
+            if(hasAtLeastOneCustomization == false)
+            {
+                // select the component name (e.g. "CPU", "GPU", "Motherboard" etc.) from the li element
+                let specTypeInContainer = liElement.querySelector("strong").innerHTML;
+                // clean up the spec type from html
+                let cleanSpecType = specTypeInContainer.substring(0, specTypeInContainer.length - 1).trim().toLowerCase();
+                // get the price of the initial component
+                let initialCompPrice = parseFloat(currentLaptop.querySelector(cleanSpecType).getAttribute("price"));
+
+                // increment the total price
+                totalLaptopPrice += initialCompPrice;
+            } // end if(hasAtLeastOneCustomization == false)
+            
+        }// end else if(liElement.querySelectorAll(".holder").length > 1)
+        
+        // case 5: there is no holder and the current <li> element
+        // will use the price of the initial component
+        else 
+        {
+            // select the component name (e.g. "CPU", "GPU", "Motherboard" etc.) from the li element
+            let specTypeInContainer = liElement.querySelector("strong").innerHTML;
+            // clean up the spec type from html
+            let cleanSpecType = specTypeInContainer.substring(0, specTypeInContainer.length - 1).trim().toLowerCase();
+            
+            // get the price of the initial component
+            let initialCompPrice = parseFloat(currentLaptop.querySelector(cleanSpecType).getAttribute("price"));
+            
+            // increment the total price
+            totalLaptopPrice += initialCompPrice;
+        } // end else
+    }); // end for each liElement
 
     return totalLaptopPrice;
-
 }
+
+
+

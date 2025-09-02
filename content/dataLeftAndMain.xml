@@ -3,25 +3,25 @@
 <root>
     <laptop href="/laptop-apple-macbook-pro-14-2024-cu-procesor-apple-m4-10-nuclee-CPU-10-nuclee-GPU-16gb-512gb-ssd" src="laptop_icons/macbook-pro-14-m4.png" nume="Apple MacBook Pro 14&quot; (M4)">
         <specificatii>
-            <motherboard>Apple MSI MEG X670E ACE</motherboard>
-            <cpu>Apple M4 (10‑core)</cpu>
-            <gpu>Apple GPU (10‑core)</gpu>
-            <ram>16GB</ram>
-            <storage>512GB SSD</storage>
-            <display>14" Liquid Retina XDR</display>
-            <os>macOS</os>
+            <motherboard price="699">Apple MSI MEG X670E ACE</motherboard>
+            <cpu price="499">Apple M4 (10‑core)</cpu>
+            <gpu price="399">Apple GPU (10‑core)</gpu>
+            <ram price="129">16GB</ram>
+            <storage price="179">512GB SSD</storage>
+            <display price="1299">14" Liquid Retina XDR</display>
+            <os price="199">macOS</os>
         </specificatii>
     </laptop>
 
     <laptop href="/laptop-lenovo-ideapad-slim-5-14irh10-i5-13420h-32gb-1tb" src="laptop_icons/lenovo-ideapad-slim-5-14.png" nume="Lenovo IdeaPad Slim 5 14IRH10">
         <specificatii>
-            <motherboard>ASUS ROG Strix Z790-E Gaming</motherboard>
-            <cpu>Intel Core i5‑13420H</cpu>
-            <gpu>Intel UHD Graphics</gpu>
-            <ram>32GB</ram>
-            <storage>1TB SSD</storage>
-            <display>14" WUXGA IPS</display>
-            <os>No OS</os>
+            <motherboard price="469">ASUS ROG Strix Z790-E Gaming</motherboard>
+            <cpu price="249">Intel Core i5‑13420H</cpu>
+            <gpu price="0">Intel UHD Graphics</gpu>
+            <ram price="149">32GB</ram>
+            <storage price="99">1TB SSD</storage>
+            <display price="299">14" WUXGA IPS</display>
+            <os price="0">No OS</os>
         </specificatii>
     </laptop>
 

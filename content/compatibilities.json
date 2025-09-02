@@ -24,15 +24,15 @@
                     {
                         "customizable": true,
                         "multipleComponents": 4,
-                        "values": ["Crucial 32GB DDR4 ECC 2933MHz", "OWC 64GB DDR4 ECC 2933MHz", "Kingston 16GB DDR4 ECC 2933MHz",
-                                    "Samsung 32GB DDR4 ECC 2933MHz", "Corsair Vengeance 32GB DDR5 6000MHz CL38 Dual Channel", 
+                        "values": ["Kingston Fury Beast 16GB DDR5 RAM Stick", "Patriot Viper Venom 32GB DDR5 RAM Stick", "Corsair VENGEANCE 32GB DDR5 RAM Stick",
+                                    "Kingston Fury Beast 8GB DDR5 RAM Stick", "Patriot Viper Venom 16GB DDR5 RAM Stick", 
                                     "Timetec 32GB DDR4 SO-DIMM 2666MHz"]
                     },
                     "STORAGE":
                     {
                         "customizable": true,
                         "multipleComponents": 2,
-                        "values": ["Apple proprietary SSD blade (Mac Pro 2019)", "SSD OWC Aura Pro X2", "SSD Samsung 970 EVO Plus",
+                        "values": ["Apple proprietary SSD blade 256GB", "SSD MacBook Pro OWC Aura Pro X2 1.0TB NVMe",
                                     "Apple OEM SSD 1TB", "SSD Transcend JetDrive 820"]
                     },
                     "OS":
@@ -66,14 +66,14 @@
                     {
                         "customizable": true,
                         "multipleComponents": 2,
-                        "values": ["Corsair Vengeance 32GB DDR5 6000MHz CL38 Dual Channel", "Corsair Vengeance LPX DDR4-3200",
-                                    "Lexar THOR OC 32GB DDR5 6000MHz CL38 Dual Channel", "Lexar ARES Black 32GB DDR5 6000MHz CL32 Dual Channel"]
+                        "values": ["Corsair VENGEANCE 32GB DDR5 RAM Stick", "Teamgroup T-Create Expert Overclocking 32GB DDR5 RAM Stick",
+                                    "Silicon Power Zenith 64GB DDR5 RAM Stick", "Lexar ARES Black 32GB DDR5 6000MHz CL32 Dual Channel"]
                     },
                     "STORAGE":
                     {
                         "customizable": true,
                         "multipleComponents": 4,
-                        "values": ["SSD Samsung 990 Pro", "SSD WD Black SN850X", "WD Blue SN570 1TB", "Samsung 870 EVO 1TB",
+                        "values": ["SSD Samsung 990 PRO 1TB", "SSD WD Black SN850X", "WD Blue SN570 1TB", "Samsung 870 EVO 1TB",
                                     "SSD Corsair MP700 Pro SE", "HDD Seagate Barracuda"]
                     },
                     "OS":

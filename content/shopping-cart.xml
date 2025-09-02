@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <section class = "laptopInShoppingCart">
+        <div class = "cancelButton"></div>
+        <section class = "laptop">
+            <img class = "laptopIcon" data-js-attributes = "src"/>
+            <div class = "laptopSpecs">
+                <strong class = "laptopName" data-js-innerText = "nume"></strong>
+
+                <ul data-js-iterator = "specificatii">
+                    <li><strong data-js-item-iterator = "innerText"></strong></li>
+                </ul>
+            </div>
+        </section>
+    </section>
+</root>
