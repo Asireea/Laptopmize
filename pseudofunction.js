@@ -195,6 +195,9 @@ function processIterators(section, laptop)
 
 function renderLaptopSpecs(laptopHref, data, struct, compatibilitiesJson)
 {
+    
+    customComponents = [];
+    //console.log("custom components = ", customComponents.join(' @ '));
     document.querySelector(".sidebarCloser").click();
 
     // select the clicked laptop by href, from data xml
@@ -442,7 +445,8 @@ function toggleSideBar()
     // select the arrow image that will close the sidebar
     let sidebarCloser = document.querySelector(".sidebarCloser");
 
-    sidebarCloser.addEventListener("click", () => {
+    sidebarCloser.addEventListener("click", (e) => {
+        e.preventDefault();
         // hide the sidebar
         menu.classList.remove('sidebarVisible');
         // make the laptop specs page larger again
@@ -452,7 +456,7 @@ function toggleSideBar()
 
         // display the holders
         document.querySelectorAll(".holderContainer").forEach(holder =>{
-            holder.classList.toggle("hideHolder");
+            holder.classList.add("hideHolder");
         });
 
         setTimeout(() => {
@@ -816,56 +820,19 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
 
     addToCustomComponents(specTypeInContainer.substring(0, specTypeInContainer.length - 1).trim().toLowerCase());
 
-
-    // -------------------- handle price changes --------------------
-/*
-    let priceLi = Array.from(draggedElement.nextElementSibling.querySelectorAll("li")).find(li => {
-        let strong = li.querySelector("strong");
-        return strong && strong.textContent.trim() === "Price:";
-    });
-
-    // get the price of the dropped compoenent
-    let priceOfDroppedElement = parseFloat(priceLi.querySelector("span").textContent);
-
-    clone.setAttribute("price", priceOfDroppedElement);
-
-
-    // get the price of the initial component that the laptop had
-    let initialComponentPrice = parseFloat(specContainer.getAttribute("price"));
-
-*/
-
-    let priceDisplayBox = document.querySelector(".priceDisplayBox");
-
-
-    //let currentLaptop = getCurrentLaptopByHref(dataLaptop);
-    //let specs = currentLaptop.querySelector("specificatii");
-    
-    //let newTotalPrice;
-
     // ---------- STYLE VISUAL ELEMENTS ON DROP ----------
 
-    //document.querySelector(".priceDisplayBox").textContent = "Price: " + newTotalPrice + " \u20AC";
-    
     if(specContainer.querySelectorAll(".holderContainer").length > 1)
     {
 
         if(specContainerSpan.innerHTML == specContainerSpan.getAttribute("data-initial"))
         {
             specContainerSpan.innerHTML = data;
-
-            //totalLaptopPrice = handlePriceChanges(totalLaptopPrice, specContainer, draggedElement, false, false, dataLaptop, dataSideBar);
-
-            //newTotalPrice = newTotalPrice - initialComponentPrice + priceOfDroppedElement;
         }
         else
         {
             specContainerSpan.innerHTML += ", " + data;
-
-            //totalLaptopPrice = handlePriceChanges(totalLaptopPrice, specContainer, draggedElement, false, true, dataLaptop, dataSideBar);
-            //newTotalPrice = newTotalPrice + priceOfDroppedElement;
         }
-        //specContainer.querySelector("span").innerHTML += ", " + data;
     }
     else if(specContainer.querySelectorAll(".holderContainer").length == 1)
     {
@@ -873,12 +840,10 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
         // name of the specified spec
         // and update it to the dropped spec name
         specContainerSpan.innerHTML = data;
-
-        //totalLaptopPrice = handlePriceChanges(totalLaptopPrice, specContainer, draggedElement, false, false, dataLaptop, dataSideBar);
-        
-        //newTotalPrice = newTotalPrice - initialComponentPrice + priceOfDroppedElement;
     }
-    
+
+
+    let priceDisplayBox = document.querySelector(".priceDisplayBox");
     let totalLaptopPrice = calcUpdatedPrice(dataLaptop, dataSideBar);
 
     console.log("total laptop price in drophandler " + totalLaptopPrice);
@@ -898,10 +863,6 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
     // add event to the cancel button
     cancelButton.addEventListener("click", e =>
     {
-        // pass the container of the name of the component the initial name
-        //let intialValue = specContainer.querySelector("span").getAttribute("data-initial");
-        //specContainer.querySelector("span").innerHTML = intialValue;
-    
         // remove the cloned image from the holder
         if(holderContainer.querySelector(".holder").firstChild)
         {
@@ -923,25 +884,13 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
                                                 .replace(/\s+/g, " ")       // collapse spaces
                                                 .trim();                    // trim edges
 
-                //let droppedCompPrice = parseFloat(cancelButton.parentElement.querySelector(".droppedImg").getAttribute("price"));
-
-                //newTotalPrice = newTotalPrice - droppedCompPrice;
-                
-                
-                
                 if(specContainerSpan.innerText == "")
                 {
                     // pass the container of the name of the component the initial name
                     let intialValue = specContainerSpan.getAttribute("data-initial");
                     specContainerSpan.innerHTML = intialValue;
 
-                    //newTotalPrice = newTotalPrice + parseFloat(specContainer.getAttribute("price"));
-
-
                     removeFromCustomComponents(specTypeInContainer.substring(0, specTypeInContainer.length - 1).trim().toLowerCase());
-                }
-                else
-                {
                 }
             }
             else if(specContainer.querySelectorAll(".holderContainer").length == 1)
@@ -949,12 +898,6 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
                 // pass the container of the name of the component the initial name
                 let intialValue = specContainer.querySelector("span").getAttribute("data-initial");
                 specContainer.querySelector("span").innerHTML = intialValue;
-
-                //let droppedCompPrice = parseFloat(cancelButton.parentElement.querySelector(".droppedImg").getAttribute("price"));
-
-                //let initCompPrice = parseFloat(specContainer.getAttribute("price"));
-
-                //newTotalPrice = newTotalPrice - droppedCompPrice + initCompPrice;
 
                 removeFromCustomComponents(specTypeInContainer.substring(0, specTypeInContainer.length - 1).trim().toLowerCase());
             }
@@ -1056,9 +999,50 @@ function runCompatibility(compatibilitiesJson)
                 });// end forEach bigComp
             }// end if(comp)
         }); // end forEach item
-    
-
 }
+
+// ---------------------------------------------------------------------------
+
+function checkCompatibility(compatibilitiesJson, parentComp, parentCompName, compToCheck)
+{
+    // get the big component from json (e.g. MOTHERBOARD, DISPLAY)
+    let comp = compatibilitiesJson[parentComp.toUpperCase()];
+
+    // mitigate the case where the comp can not be found
+    if(!comp) return false;
+
+    // find the specific parent component (e.g. "Apple MSI MEG X670E ACE")
+    let parentItem = comp.items.find(item => item.name === parentCompName);
+    // if the specific parent component can not be found -> return false
+    if (!parentItem) return false;
+
+
+    // depComponent gets the component name
+        // e.g. CPU, GPU, RAM etc.
+        // depDetails is a component object with multiple properties
+        // e.g. 
+        //   {
+        //   "customizable": true,
+        //   "multipleComponents": 1,
+        //   "values": ["Apple M4 (10‑core)", "Intel Xeon W-3223", "Intel Xeon W-3265M", "Intel Xeon W-3225"]
+        //   }
+
+    // iterate through the dependencies for the selected parent component
+    // anc check the smaller objects
+    for(let [depComponent, depDetails] of Object.entries(parentItem.dependencies))
+    {
+        // check if the value of the component to check
+        // can be found in the valid values from dependencies
+        if(depDetails.values.includes(compToCheck)) return true;
+    }
+
+    return false;
+}
+
+
+
+// ---------------------------------------------------------------------------
+
 
 function addPreventDefault(e)
 {
@@ -1150,11 +1134,15 @@ function addItemToCart()
     let specsPageParent = document.querySelector("#laptopSpecsPage");
     let laptopIcon = specsPageParent.querySelector(".mainLaptopIcon");
 
+    const pathParts = window.location.pathname.split("/");
+    const productLink = pathParts[pathParts.length - 1];
+
     let itemCookie = 
     {
         itemCount: 1,
         details:
         {   
+            href: productLink,
             src: laptopIcon.getAttribute("src"),
             name: laptopIcon.getAttribute("nume"),
             customComponents: customComponents,
@@ -1174,32 +1162,122 @@ function addItemToCart()
             itemCookie.details[componentName] = componentValue;
         });
 
+        //console.log("custom components = ", customComponents.join(' @ '));
+
     if(getItemCartCookies("cartItems").length == 0)
     {
         setCookie("cartItems1", JSON.stringify([itemCookie]), 7);
     }
     else
     {
+/*
+        let cartItems = getItemCartCookies("cartItems");
+        let indexCookie = 2;
+
+        for(let i = 0; i < cartItems.length; i++)
+        {
+            let jsonCookieObject = JSONtoObject(cartItems[i]);
+
+            if(compareObjects(itemCookie.details, JSONtoObject(cartItems[i]).details))
+            {
+                //jsonCookieObject.itemCount++;
+                //setCookie("cartItems" + (i+1), JSON.stringify([jsonCookieObject]), 7);
+            }
+            else
+            {
+                let cookieName = JSON.stringify(cartItems[cartItems.length-1]).match(/^([^=]+)=/)[1];
+                let index = parseInt(cookieName.slice(-1));
+                
+                setCookie("cartItems" + (index+1), JSON.stringify([itemCookie]), 7);
+
+            }
+
+        }
+*/
+
+        
         for(let i = 0; i < getItemCartCookies("cartItems").length; i++)
         {
             let cartItem = getItemCartCookies("cartItems")[i];
+            
 
             let jsonCookieObject = JSONtoObject(cartItem);
+
+            console.log("===================================================");
+            //console.log("cart item = ", cartItem);
+    
+           console.log("#", itemCookie.details.name);
+            //console.log("else if-ul returneaza ", getItemCartCookies("cartItems").length == i+1);
+           console.log("#", jsonCookieObject.details.name);
+           console.log("i = ", i);
+           // console.log("compare: ", compareObjects(itemCookie.details, jsonCookieObject.details));
+//console.log("custom components = ", customComponents.join(' @ '));
+            console.log("length: ", getItemCartCookies("cartItems").length);
+
             if( compareObjects(itemCookie.details, jsonCookieObject.details) )
             {
+                //console.log("here in if");
                 jsonCookieObject.itemCount++;
                 setCookie("cartItems" + (i+1), JSON.stringify([jsonCookieObject]), 7);
+                
+                //console.log("#", itemCookie.details.name);
+                //console.log("else if-ul returneaza ", getItemCartCookies("cartItems").length == i+1);
+                //console.log("#", jsonCookieObject.details.name);
+                //console.log("cart item = ", getItemCartCookies("cartItems")[i]);
                 break;
             }
+             else
+            {
+                let cookieName = JSON.stringify(cartItem[cartItem.length-1]).match(/^([^=]+)=/)[1];
+                let index = parseInt(cookieName.slice(-1));
+                
+                setCookie("cartItems" + (index+1), JSON.stringify([itemCookie]), 7);
+
+            }
+            /*
             else if(getItemCartCookies("cartItems").length == i+1)
             {
+                //console.log("here in else if");
                 setCookie("cartItems" + (i+2), JSON.stringify([itemCookie]), 7);
+
+                //console.log("cart item = ", getItemCartCookies("cartItems")[i]);
                 break;
-            }
+            }*/
+
+
+            //
+
         }
+
     }
 
 }// end addItemToCart
+
+// element = itemCookie
+function isInCart(element)
+{
+    for(let i = 0; i < cartItems.length; i++)
+    {
+        if(compareObjects(element.details, JSONtoObject(cartItems[i]).details))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function addToCartCookie()
+{
+
+}
+
+function extractIndexCookieCart(item)
+{
+    let cookieName = JSON.stringify(item).match(/^([^=]+)=/)[1];
+    return cookieName.slice(-1);
+}
+
 
 function compareObjects(obj1, obj2) {return JSON.stringify(obj1) === JSON.stringify(obj2);}
 
@@ -1244,12 +1322,6 @@ function calcTotalPrice(item)
     });
 
     return totalPrice;
-}
-
-function handleLaptopChanges(item, )
-{
-    let currentLaptop = getCurrentLaptopByHref(dataLaptopsXml);
-    let dataCustomComponentsXml = dataSideBar;
 }
 
 
@@ -1334,6 +1406,14 @@ function calcUpdatedPrice(dataLaptop, dataCustomComponentsXml)
 
                 // select the current customization by looking at the dropped image, against the components XML
                 let currentCustomization = getCurrentCustomization(dataCustomComponentsXml, childImg);
+                
+                // mitigate the case where the user modifies the data-id and the currentCustomization will come out undefined or null
+                if(currentCustomization == null)
+                {
+                    alert("Stop playing!!");
+                    location.reload();
+                }
+
                 // get tthe price of the customization from XML
                 let currentCustomizationPrice = parseFloat(currentCustomization.querySelector("Price").textContent);
                 // increment the total laptop price
@@ -1372,6 +1452,14 @@ function calcUpdatedPrice(dataLaptop, dataCustomComponentsXml)
 
                     // select the current customization by looking at the dropped image, against the components XML
                     let currentCustomization = getCurrentCustomization(dataCustomComponentsXml, childImg);
+
+                    // mitigate the case where the user modifies the data-id and the currentCustomization will come out undefined or null
+                    if(currentCustomization == null)
+                    {
+                        alert("Stop playing!!");
+                        location.reload();
+                    }
+
                     // get tthe price of the customization from XML
                     let currentCustomizationPrice = parseFloat(currentCustomization.querySelector("Price").textContent);
                     // increment the total laptop price

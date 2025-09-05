@@ -1,13 +1,20 @@
 
+let structShoppingCartXML, dataComponentsXML, dataLaptopsXML;
+
 // ----------------- XML LOADER FOR ITEMS IN THE CART ----------------- //
 
 Promise.all([
-    fetch(HTTP_HOST + '/content/structShoppingCart.xml').then(res => res.text())
+    fetch(HTTP_HOST + '/content/structShoppingCart.xml').then(res => res.text()),
+    fetch(HTTP_HOST + '/content/dataComponents.xml').then(res => res.text()),
+    fetch(HTTP_HOST + '/content/dataLeftAndMain.xml').then(res => res.text()),
+    fetch(HTTP_HOST + '/content/compatibilities.json').then(res => res.json())
 ])
-.then(([structShoppingCartXml]) => {
+.then(([structShoppingCartXml, dataSideBarXml, dataLaptopsXml, compatibilitiesJson]) => {
     const parser = new DOMParser();
 
-    const struct = parser.parseFromString(structShoppingCartXml, "application/xml");
+    structShoppingCartXML = parser.parseFromString(structShoppingCartXml, "application/xml");
+    dataComponentsXML = parser.parseFromString(dataSideBarXml, "application/xml");
+    dataLaptopsXML = parser.parseFromString(dataLaptopsXml, "application/xml");
 
 if(cartCount != 0)
 {
@@ -15,7 +22,7 @@ if(cartCount != 0)
     let cartContainer = document.createElement("section");
     cartContainer.classList.add("cartContainer");
 
-    let concreteParent = struct.querySelector(".itemBox");
+    let concreteParent = structShoppingCartXML.querySelector(".itemBox");
     
     getItemCartCookies("cartItems").forEach(itemInCart => 
     {
@@ -41,6 +48,13 @@ if(cartCount != 0)
 
         // select the details inner object from the cookie object
         let detailsObj = itemObj.details;
+
+        let currentLaptop = checkIfLaptopExists(detailsObj, dataLaptopsXML);
+        if(currentLaptop == false) return;
+
+        // a control boolean that will decide if the laptop's cookie has been modified => makes the laptop become unavailable
+        let laptopIsOK = true;
+
         // iterate through keys in 
         for(let key in detailsObj)
         {
@@ -58,10 +72,44 @@ if(cartCount != 0)
             {
                 customComponentsArray = detailsObj[key];
             }
+            else if(key == "href")
+            {
+                continue;
+            }
             else
             {
                 //console.log("in else " + key);
-                
+
+                if(key == "motherboard")
+                {
+                    laptopIsOK = (currentLaptop.querySelector("motherboard").textContent == detailsObj[key]);
+                }
+
+                if((key != "motherboard") && (key != "name"))
+                {
+                    let itemComp = currentLaptop.querySelector(key.toLowerCase());
+
+                    // in the case there are multiple components -> normalize the list into 
+                    // an array with multiple strings
+                    let customizationValuesArr = normalizeComponentValues(detailsObj[key]);
+
+                    customizationValuesArr.forEach(customization =>
+                    {
+                        // check 1: if component isn't default 
+                        if(itemComp.textContent != customization)
+                        {
+                            
+                            // check 2: if the component exists in dataComponents.xml
+                            if(checkIfComponentExists(dataComponentsXML, customization))
+                            {
+                                // check 3: if it's compatible with the mb
+                                laptopIsOK = checkCompatibility(compatibilitiesJson, "motherboard", detailsObj["motherboard"], customization);
+                            }
+                        }
+                    }); // end for each customization
+
+                } 
+
                 let liClone = innerChild.cloneNode(true);
                 
                 liClone.querySelector("strong").innerHTML = key;
@@ -92,6 +140,18 @@ if(cartCount != 0)
         // pass the countDisplay the number of laptops in the cookie
         itemBoxClone.querySelector(".countDisplay").innerHTML = itemObj.itemCount;
 
+        if(laptopIsOK)
+        {
+            plusOrMinusItem(itemBoxClone);
+            trashItem(itemBoxClone);
+        }
+        else
+        {
+            itemBoxClone.style.filter = "grayscale(1)";
+            itemBoxClone.style.opacity = "0.5";
+        }
+
+        // append the individual laptop card to tbe container
         cartContainer.appendChild(itemBoxClone);
         //itemBoxClone = tempItemBoxClone.cloneNode(true);
     }); // end forEach
@@ -100,10 +160,6 @@ if(cartCount != 0)
 
     cartContainer.style.paddingTop = getElementHeight("#navigationBar") + "px";
 
-    plusOrMinusItem();
-    trashItem();
-
-    
 }// end if(cartCount != 0)
 
     // ----------------- IF THERE IS NO ITEM IN THE SHOPPING CART ----------------- //
@@ -124,11 +180,11 @@ if(cartCount != 0)
 
 // ----------------- LOGIC FOR THE PLUS AND MINUS BUTTONS ----------------- //
 
-function plusOrMinusItem() 
+function plusOrMinusItem(section) 
 {
     // ----------------- PLUS BUTTON ----------------- //
 
-    let moreButtons = document.querySelectorAll(".moreButton");
+    let moreButtons = section.querySelectorAll(".moreButton");
     
     moreButtons.forEach(moreButton => {
         moreButton.addEventListener("click", (e) => {
@@ -192,7 +248,7 @@ function plusOrMinusItem()
     
     // ----------------- MINUS BUTTON ----------------- //
 
-    let lessButtons = document.querySelectorAll(".lessButton");
+    let lessButtons = section.querySelectorAll(".lessButton");
 
     lessButtons.forEach(lessButton => {
 
@@ -216,11 +272,9 @@ function plusOrMinusItem()
             //let countDisplay = lessButton.parentElement.querySelector(".countDisplay");
             // and parse to integer
             count = Number(countDisplay.innerText);
-            console.log("here before the if");
 
             if(count > 1)
             {
-                console.log("here in the if");
                 // decrement the number
                 count--;
                 // modify in the html element
@@ -280,9 +334,9 @@ function delete_cookie(name) {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-function trashItem()
+function trashItem(section)
 {
-    let cancelOrderButtons = document.querySelectorAll(".cancelOrderButton");
+    let cancelOrderButtons = section.querySelectorAll(".cancelOrderButton");
 
     cancelOrderButtons.forEach(cancelOrderButton => {
 
@@ -510,3 +564,68 @@ function drawEmptyShoppingCartPage()
 
     requestAnimationFrame(animate);
 }
+
+
+// ------------------------- HANDLE COOKIE CORRECTION IN SHOPPING CART -------------------------
+
+function checkDefault(href, component, dataLaptopsXml)
+{
+    let item = dataLaptopsXml.querySelector('laptop[href="' + href + '"] specificatii > ' + component.name );
+
+
+    return (  item && (component.value == item.textContent.trim().toLowerCase() ) 
+                && (component.pret == parseFloat(item.getAttribute("pret")) )  );
+
+}
+
+function decodeHtmlEntities(str) 
+{
+    const txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
+}
+
+function checkIfLaptopExists(laptopCookie, dataLaptopsXml)
+{
+    // select the clicked laptop by href, from data xml
+    let currentLaptop = dataLaptopsXml.querySelector('laptop[href="' + "/" + laptopCookie.href + '"]');
+
+    if(currentLaptop == null)
+    {
+        alert("Don't...");
+        return false;
+    }
+
+    // check if the key "name" in the cookie is the same as the attribute "nume" of the laptop in the dataLaptopssXML 
+    if(laptopCookie.name == decodeHtmlEntities(currentLaptop.getAttribute("nume")))
+    {
+        return currentLaptop;
+    }
+}
+
+function checkIfComponentExists(dataComponentsXML, componentValue) {
+    let sections = dataComponentsXML.querySelector("root").children;
+
+    for (let i = 0; i < sections.length; i++) {
+        let sectionTag = sections[i].tagName;
+
+        let nodeList = dataComponentsXML.querySelectorAll(`${sectionTag} > *`);
+
+        for (let item of nodeList) {
+            if (item.getAttribute("nume") == componentValue) {
+                return true; // item found
+            }
+        }
+    }
+
+    return false; // nothing matched
+}
+
+function normalizeComponentValues(compValues) 
+{
+    return compValues
+        .split(/\s*,\s*/)   // split by commas with optional spaces
+        .map(s => s.trim()) // remove extra whitespace
+        .filter(s => s);    // remove empty strings
+}
+
