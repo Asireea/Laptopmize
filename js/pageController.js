@@ -49,7 +49,7 @@ if(currentUrl.origin + currentUrl.pathname === HTTP_HOST + "/shopping-cart")
     });
 }
 let pageScript = document.createElement("script");
-pageScript.src = page + ".js";
+pageScript.src = "js/" + page + ".js";
 document.body.appendChild(pageScript);
 
 setTimeout(() => {
