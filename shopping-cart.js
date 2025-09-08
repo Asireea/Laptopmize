@@ -26,6 +26,8 @@ if(cartCount != 0)
     
     getItemCartCookies("cartItems").forEach(itemInCart => 
     {
+        let totalLaptopPrice = 0;
+        //console.log(itemInCart);
         let itemBoxClone = concreteParent.cloneNode(true);
 
         // Clone the <ul> template for this cookie
@@ -49,7 +51,9 @@ if(cartCount != 0)
         // select the details inner object from the cookie object
         let detailsObj = itemObj.details;
 
+        // get the currentLaptop object from xml
         let currentLaptop = checkIfLaptopExists(detailsObj, dataLaptopsXML);
+        // if it doesn't exist, don't go further
         if(currentLaptop == false) return;
 
         // a control boolean that will decide if the laptop's cookie has been modified => makes the laptop become unavailable
@@ -72,8 +76,9 @@ if(cartCount != 0)
             {
                 customComponentsArray = detailsObj[key];
             }
-            else if(key == "href")
+            else if(key == "href" || key == "nameOfCookie")
             {
+                // if the iterated key is href or nameOfCookie -> skip
                 continue;
             }
             else
@@ -83,6 +88,10 @@ if(cartCount != 0)
                 if(key == "motherboard")
                 {
                     laptopIsOK = (currentLaptop.querySelector("motherboard").textContent == detailsObj[key]);
+                    if(laptopIsOK)
+                    {
+                        totalLaptopPrice += parseFloat(currentLaptop.querySelector("motherboard").getAttribute("price"));
+                    }
                 }
 
                 if((key != "motherboard") && (key != "name"))
@@ -104,6 +113,35 @@ if(cartCount != 0)
                             {
                                 // check 3: if it's compatible with the mb
                                 laptopIsOK = checkCompatibility(compatibilitiesJson, "motherboard", detailsObj["motherboard"], customization);
+                                if(laptopIsOK)
+                                {
+                                        let sections = dataComponentsXML.querySelector("root").children;
+                                        for (let i = 0; i < sections.length; i++)
+                                        {
+                                            let sectionTag = sections[i].tagName;
+
+                                            let nodeList = dataComponentsXML.querySelectorAll(`${sectionTag} > *`);
+
+                                            nodeList.forEach(item => {
+                                                let itemName = item.getAttribute("nume");
+                                                if(itemName == customization)
+                                                {
+                                                    totalLaptopPrice += parseFloat(item.querySelector("Price").textContent);
+                                                    
+                                                }
+                                            });
+                                        }
+
+                                    
+                                    //totalLaptopPrice += parseFloat(currentLaptop.querySelector(key.toLowerCase()).getAttribute("price"));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if(laptopIsOK)
+                            {
+                                totalLaptopPrice += parseFloat(currentLaptop.querySelector(key.toLowerCase()).getAttribute("price"));
                             }
                         }
                     }); // end for each customization
@@ -133,7 +171,7 @@ if(cartCount != 0)
             }
 
             //itemBoxClone.querySelector(".specsUl").replaceWith(ulClone);
-        }
+        }// end for key in detailsObj
 
         itemBoxClone.querySelector(".specsUl").replaceWith(ulClone);
 
@@ -142,6 +180,9 @@ if(cartCount != 0)
 
         if(laptopIsOK)
         {
+            // append a box that shows the price 
+            itemBoxClone.querySelector(".priceDisplayBox").textContent = totalLaptopPrice + " \u20AC";
+
             plusOrMinusItem(itemBoxClone);
             trashItem(itemBoxClone);
         }
@@ -151,10 +192,11 @@ if(cartCount != 0)
             itemBoxClone.style.opacity = "0.5";
         }
 
+        //console.log(totalLaptopPrice);
         // append the individual laptop card to tbe container
         cartContainer.appendChild(itemBoxClone);
         //itemBoxClone = tempItemBoxClone.cloneNode(true);
-    }); // end forEach
+    }); // end forEach itemInCart
 
     document.querySelector("body").appendChild(cartContainer);
 
@@ -388,7 +430,9 @@ function trashItem(section)
         });// end addEventListener
 
     }); // end forEach
-}
+} // end function trashItem
+
+
 
 // ----------------- UTILITY FUNCTIONS FOR THE EMPTY SHOPPING CART PAGE ----------------- //
 

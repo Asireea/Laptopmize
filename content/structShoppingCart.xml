@@ -15,8 +15,8 @@
                 <div class="lessButton">-</div>
                 <div class="countDisplay"></div>
                 <div class="moreButton">+</div>
-                
             </div>
+            <div class="priceDisplayBox"></div>
         </div>
     </section>
 </root>
