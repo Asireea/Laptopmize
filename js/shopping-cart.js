@@ -1,6 +1,8 @@
 
 let structShoppingCartXML, dataComponentsXML, dataLaptopsXML;
 
+let finalTotalPrice = 0;
+
 // ----------------- XML LOADER FOR ITEMS IN THE CART ----------------- //
 
 Promise.all([
@@ -18,6 +20,14 @@ Promise.all([
 
 if(cartCount != 0)
 {
+    let cartPage = document.createElement("section");
+    cartPage.classList.add("cartPage");
+
+    let finalizeStepsBox = document.createElement("section");
+    finalizeStepsBox.classList.add("finalizeStepsBox");
+
+    let totalPriceDisplayBox = document.createElement("div");
+    totalPriceDisplayBox.classList.add("totalPriceDisplayBox");
 
     let cartContainer = document.createElement("section");
     cartContainer.classList.add("cartContainer");
@@ -146,6 +156,7 @@ if(cartCount != 0)
                         }
                     }); // end for each customization
 
+                    
                 } 
 
                 let liClone = innerChild.cloneNode(true);
@@ -181,10 +192,12 @@ if(cartCount != 0)
         if(laptopIsOK)
         {
             // append a box that shows the price 
-            itemBoxClone.querySelector(".priceDisplayBox").textContent = totalLaptopPrice + " \u20AC";
+            itemBoxClone.querySelector(".priceDisplayBox").textContent = totalLaptopPrice * itemObj.itemCount + " \u20AC";
+            finalTotalPrice += totalLaptopPrice * itemObj.itemCount;
+            totalPriceDisplayBox.textContent = "Cart total: " + finalTotalPrice + " \u20AC";
 
-            plusOrMinusItem(itemBoxClone);
-            trashItem(itemBoxClone);
+            plusOrMinusItem(itemBoxClone, totalLaptopPrice);
+            trashItem(itemBoxClone, totalLaptopPrice);
         }
         else
         {
@@ -198,9 +211,19 @@ if(cartCount != 0)
         //itemBoxClone = tempItemBoxClone.cloneNode(true);
     }); // end forEach itemInCart
 
-    document.querySelector("body").appendChild(cartContainer);
+    document.querySelector("body").appendChild(cartPage);
+    cartPage.appendChild(cartContainer);
+    cartPage.appendChild(finalizeStepsBox);
+    finalizeStepsBox.appendChild(totalPriceDisplayBox);
 
-    cartContainer.style.paddingTop = getElementHeight("#navigationBar") + "px";
+    let checkoutBtn = document.createElement("button");
+    checkoutBtn.classList.add("checkoutBtn");
+    checkoutBtn.textContent = "Proceed To Checkout";
+    finalizeStepsBox.appendChild(checkoutBtn);
+
+    console.log(finalTotalPrice);
+
+    cartPage.style.paddingTop = getElementHeight("#navigationBar") + "px";
 
 }// end if(cartCount != 0)
 
@@ -222,7 +245,7 @@ if(cartCount != 0)
 
 // ----------------- LOGIC FOR THE PLUS AND MINUS BUTTONS ----------------- //
 
-function plusOrMinusItem(section) 
+function plusOrMinusItem(section, price) 
 {
     // ----------------- PLUS BUTTON ----------------- //
 
@@ -236,10 +259,19 @@ function plusOrMinusItem(section)
             // and parse to integer
             let count = Number(countDisplay.innerText);
 
+            finalTotalPrice = finalTotalPrice - price * count;
+            
             // increment the number
             count++;
             // modify in the html element
             countDisplay.innerHTML = count;
+
+            // update the price
+            let finalPrice = price * count;
+            section.querySelector(".priceDisplayBox").textContent = finalPrice + " \u20AC";
+
+            finalTotalPrice = finalTotalPrice + price * count;
+            document.querySelector(".totalPriceDisplayBox").textContent = "Cart total: " + finalTotalPrice + " \u20AC";
 
             // increment the total number of items in the cart
             cartCount++;
@@ -317,10 +349,18 @@ function plusOrMinusItem(section)
 
             if(count > 1)
             {
+                finalTotalPrice = finalTotalPrice - price * count;
                 // decrement the number
                 count--;
                 // modify in the html element
                 countDisplay.innerHTML = count;
+
+                 // update the price
+                let finalPrice = price * count;
+                section.querySelector(".priceDisplayBox").textContent = finalPrice + " \u20AC";
+
+                finalTotalPrice = finalTotalPrice + price * count;
+                document.querySelector(".totalPriceDisplayBox").textContent = "Cart total: " + finalTotalPrice + " \u20AC";
 
                 // decrement the total number of items in the cart
                 cartCount--;
@@ -376,7 +416,7 @@ function delete_cookie(name) {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-function trashItem(section)
+function trashItem(section, price)
 {
     let cancelOrderButtons = section.querySelectorAll(".cancelOrderButton");
 
@@ -407,10 +447,13 @@ function trashItem(section)
                 totalNoOfItems -= cartItem.itemCount;
                 document.querySelector(".counterDot").textContent = totalNoOfItems;
 
+                finalTotalPrice = finalTotalPrice - price * cartItem.itemCount;
+                document.querySelector(".totalPriceDisplayBox").textContent = "Cart total: " + finalTotalPrice + " \u20AC";
+
                 if(totalNoOfItems == 0)
                 {
                     document.querySelector(".counterDot").style.visibility = "hidden";
-                    document.querySelector(".cartContainer").remove();
+                    document.querySelector(".cartPage").remove();
                     let canvashtml = document.createElement("canvas");
                     document.querySelector("body").appendChild(canvashtml);
                     canvashtml.classList.add("canvasHTML");

@@ -38,6 +38,34 @@
                 <Freqency>3.50 GHz</Freqency>
             </specificatii>
         </CPU>
+
+        <CPU src="components/Intel-Core-i5-14600K.jpg" nume="Intel Core i5-14600K">
+            <specificatii>
+                <Price>319</Price>
+                <NumberOfCores>14</NumberOfCores>
+                <NumberOfThreads>20</NumberOfThreads>
+                <Freqency>5.30 GHz</Freqency>
+            </specificatii>
+        </CPU>
+
+        <CPU src="components/Intel-Core-i7-14700K.jpg" nume="Intel Core i7-14700K">
+            <specificatii>
+                <Price>576</Price>
+                <NumberOfCores>20</NumberOfCores>
+                <NumberOfThreads>28</NumberOfThreads>
+                <Freqency>5.60 GHz</Freqency>
+            </specificatii>
+        </CPU>
+
+        <CPU src="components/Intel-Core-i9-14900K.jpg" nume="Intel Core i9-14900K">
+            <specificatii>
+                <Price>589</Price>
+                <NumberOfCores>24</NumberOfCores>
+                <NumberOfThreads>32</NumberOfThreads>
+                <Freqency>6.00 GHz</Freqency>
+            </specificatii>
+        </CPU>
+
     </processors>
 
     <graphicsCards>
@@ -69,6 +97,36 @@
                 <Features>Ray tracing, mesh shading, dynamic caching</Features>
             </specificatii>
         </GPU>
+
+        <GPU src="components/NVIDIA-RTX-4070-SUPER.jpg" nume="NVIDIA RTX 4070 SUPER">
+            <specificatii>
+                <Price>599</Price>
+                <Freqency>2475 MHz</Freqency>
+                <MemorySize>12 GB</MemorySize>
+                <MemoryType>GDDR6X</MemoryType>
+                <Gaming>Yes</Gaming>
+                <PowerRequirement>650 W</PowerRequirement>
+            </specificatii>
+        </GPU>
+
+        <GPU src="components/NVIDIA-RTX-4080-SUPER.jpg" nume="NVIDIA RTX 4080 SUPER">
+            <specificatii>
+                <Price>999</Price>
+                <ClockSpeeds>Base 2295 MHz, Boost 2550 MHz</ClockSpeeds>
+                <MemoryBandwidth>736 GB/s</MemoryBandwidth>
+                <Features>DLSS 3.5, Ray Tracing, AV1 Dual Encoders</Features>
+            </specificatii>
+        </GPU>
+
+        <GPU src="components/AMD-Radeon-RX-7900-XT.jpg" nume="AMD Radeon RX 7900 XT">
+            <specificatii>
+                <Price>749</Price>
+                <Freqency>2000 MHz</Freqency>
+                <MemorySize>20 GB</MemorySize>
+                <MemoryType>GDDR6</MemoryType>
+            </specificatii>
+        </GPU>
+
     </graphicsCards>
 
     <ramSticks>
@@ -152,7 +210,52 @@
                 <Frequency>6400 MHz</Frequency>
             </specificatii>
         </RAM>
-        
+
+        <RAM src="components/Crucial-Pro-Overclocking-32GB-DDR5.jpg" nume="Crucial Pro Overclocking 32GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>119</Price>
+                <Capacity>32GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/ADATA-XPG-Lancer-Blade-RGB-16GB-DDR5.jpg" nume="ADATA XPG Lancer Blade RGB 16GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>79</Price>
+                <Capacity>16GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/ADATA-XPG-Lancer-Blade-32GB-DDR5.jpg" nume="ADATA XPG Lancer Blade 32GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>139</Price>
+                <Capacity>32GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/ADATA-XPG-Lancer-RGB-64GB-DDR5.jpg" nume="ADATA XPG Lancer RGB 64GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>249</Price>
+                <Capacity>64GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6400 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
+        <RAM src="components/Crucial-Pro-Overclocking-16GB-DDR5.jpg" nume="Crucial Pro Overclocking 16GB DDR5 RAM Stick">
+            <specificatii>
+                <Price>69</Price>
+                <Capacity>16GB</Capacity>
+                <Type>DDR5</Type>
+                <Frequency>6000 MHz</Frequency>
+            </specificatii>
+        </RAM>
+
     </ramSticks>
 
     <storageUnits>
@@ -201,6 +304,26 @@
                 <ReadSpeed>7500 MB/s</ReadSpeed>
             </specificatii>
         </STORAGE>
+
+        <STORAGE src="components/SSD-Samsung-990-PRO-2TB.jpg" nume="SSD Samsung 990 PRO 2TB NVMe">
+            <specificatii>
+                <Price>229</Price>
+                <Capacity>2TB</Capacity>
+                <WriteSpeed>6900 MB/s</WriteSpeed>
+                <ReadSpeed>7450 MB/s</ReadSpeed>
+            </specificatii>
+        </STORAGE>
+
+        <STORAGE src="components/SSD-WD-Blue-SA510-1TB.jpg" nume="SSD WD Blue SA510 1TB SATA">
+            <specificatii>
+                <Price>59</Price>
+                <Capacity>1TB</Capacity>
+                <WriteSpeed>520 MB/s</WriteSpeed>
+                <ReadSpeed>545 MB/s</ReadSpeed>
+                <ControllerType>SATA</ControllerType>
+            </specificatii>
+        </STORAGE>
+
     </storageUnits>
     
     <OSes>

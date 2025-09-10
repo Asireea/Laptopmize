@@ -22,6 +22,8 @@ let data, struct, dataSideBar, structSideBar;
     const leftAndMainContainer = document.querySelector("#leftAndMain");
     leftAndMainContainer.style.paddingTop = getElementHeight("#navigationBar") + "px";
 
+    document.querySelector(".laptopPage").style.top = getElementHeight("#navigationBar") + "px";
+
 // ----------------- XML LOADER FOR LAPTOP CARDS AND SPECS MENU ----------------- //
 // ----------------- XML LOADER FOR CUSTOMIZATION MENU ----------------- //
 

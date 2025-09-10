@@ -258,7 +258,7 @@ function renderSpecsPageButtons(struct)
     toggleSideBar();
 
 }
-
+/*
 function getCenter(imgIconElement)
     {
         
@@ -268,6 +268,8 @@ function getCenter(imgIconElement)
         
         let imgRect = imgIconElement.getBoundingClientRect();
         let parentRect = imgParent.getBoundingClientRect();
+
+        
         
         // Center of the image relative to its parent
         //let centerX = imgRect.left - parentRect.left + imgRect.width / 2;
@@ -276,6 +278,21 @@ function getCenter(imgIconElement)
         return {X: imgRect.left - parentRect.left + imgRect.width / 2,
                 Y: imgRect.top - parentRect.top + imgRect.height / 2};
     }
+*/
+
+function getCenter(imgIconElement)
+{
+    
+    //---------------------- Get original image's center ----------------------
+    
+    let imgRect = imgIconElement.getBoundingClientRect();
+    
+    // Center of the image relative to its parent
+    //let centerX = imgRect.left - parentRect.left + imgRect.width / 2;
+    //let centerY = imgRect.top - parentRect.top + imgRect.height / 2;
+    return {X: imgRect.left + imgRect.width / 2,
+            Y: imgRect.top + imgRect.height / 2};
+}
 
 function moveLaptopToCart() 
 {
@@ -333,6 +350,9 @@ function moveLaptopToCart()
                 // position the ghost image on top of the laptop image and in the middle
                 img.style.left = centerX - img.offsetWidth/8 + "px";
                 img.style.top = centerY - img.offsetHeight/8 + "px";
+
+                //console.log("left: ", img.style.left, " top: ", img.style.top);
+
                 // and make it smaller :))
                 img.style.width = "5%";
                 
@@ -437,6 +457,7 @@ function toggleSideBar()
         setTimeout(() => {
             centerX = (getCenter(document.querySelector(".mainLaptopIcon"))).X;
             centerY = (getCenter(document.querySelector(".mainLaptopIcon"))).Y;
+
         }, 400);
 
 
@@ -601,6 +622,15 @@ function buildSubmenu(struct, menuSection, itemSection)
     .replaceWith(convertXmlToHtml(submenuClone));
 }
 
+// helper function that separates the input string into separated words
+function splitIntoSeparatedWords(str) 
+{
+    // Match uppercase letters, including acronyms
+    const words = str.match(/([A-Z]+(?=[A-Z][a-z])|[A-Z][a-z]+)/g);
+    // If no match (single word), return the original string
+    return words ? words.join(' ') : str;
+}
+
 /*
     struct - element of xml structure -> html template structure
     item - xml item = data item template
@@ -653,8 +683,7 @@ function buildIterator(struct, item, iteratorID)
             // select the element with data-js-item-iterator from the clone of <li> element
             // and give it the inner HTML of the name of the node from dataItemChild 
             // e.g. CPU, GPU, DISPLAY etc.
-            childClone.querySelector('[data-js-item-iterator="innerText"]').innerHTML = dataItemChild.nodeName + ": ";
-
+            childClone.querySelector('[data-js-item-iterator="innerText"]').innerHTML = splitIntoSeparatedWords(dataItemChild.nodeName) + ": "; 
 
             let price = dataItemChild.getAttribute("price");
             childClone.setAttribute("price", price);
@@ -846,7 +875,7 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
     let priceDisplayBox = document.querySelector(".priceDisplayBox");
     let totalLaptopPrice = calcUpdatedPrice(dataLaptop, dataSideBar);
 
-    console.log("total laptop price in drophandler " + totalLaptopPrice);
+    //console.log("total laptop price in drophandler " + totalLaptopPrice);
     // update the price in the price display box
     priceDisplayBox.textContent = "Price: " + totalLaptopPrice + " \u20AC";
 
@@ -906,7 +935,7 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
             holderContainer.querySelector(".holder").firstChild.remove();
 
             totalLaptopPrice = calcUpdatedPrice(dataLaptop, dataSideBar);
-            console.log("total price in cancel " + totalLaptopPrice); 
+            //console.log("total price in cancel " + totalLaptopPrice); 
 
             priceDisplayBox.textContent = "Price: " + totalLaptopPrice + " \u20AC";
         }
@@ -1140,7 +1169,7 @@ function addItemToCart()
 
     // array of cookies with the name containing the input string
     let cartItems = sortCookiesByName(getItemCartCookies("cartItems"));
-    console.log(cartItems);
+    //console.log(cartItems);
 
     // get the next name of cookie
     let nameOfCookie = "cartItems" + (getLastCartIndex(cartItems) + 1);

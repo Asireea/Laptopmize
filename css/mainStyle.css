@@ -136,6 +136,10 @@ nav {
     position: fixed;
     flex-direction: column;
     transition: width 0.3s ease;
+
+    bottom: 0;            /* stick to bottom of viewport */
+    overflow-y: auto;     /* enable vertical scroll */
+    overflow-x: hidden;   /* prevent horizontal scroll */
 }
 
 #laptopSpecsContainer {
@@ -251,7 +255,8 @@ nav {
 */
 
 .mainLaptopIconGhost{
-    position: absolute;
+    position: fixed;
+    z-index: 100 !important;
 }
 /* ------------------ SPECS PAGE BUTTONS CONTAINER ------------------ */
 .specsPageButtonsContainer {
@@ -267,7 +272,7 @@ nav {
     background: #fff;
     border: 2px solid #4f51d4;
     border-radius: 12px;
-    padding: 10px 20px;
+    padding: 10px;
     font-family: "Segoe UI", sans-serif;
     font-size: 28px;
     font-weight: bold;
@@ -491,15 +496,18 @@ nav {
     border-bottom: none;
 }
 
+.tooltip-content li > strong::after{
+    content: " ";
+} 
+
 
 /* ------------------------------- SHOPPING CART PAGE ------------------------------- */
 
 .itemBox {
-    width: 90%;
     display: flex;
     flex-direction: row;
     background-color: #f9f9f9;   /* lighter background for card */
-    gap: 15px;
+    gap: 21px;
     padding: 20px;
     margin: 15px auto;           /* centers horizontally */
     justify-content: space-between;
@@ -643,6 +651,76 @@ nav {
     font-weight: 600;
     color: #111;
 }
+
+.cartPage {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Left: scrollable cart */
+.cartContainer {
+    overflow-y: auto;
+    width: 75%;
+}
+
+/* Right: fixed finalize box */
+.finalizeStepsBox {
+    width: 25%;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+
+
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.totalPriceDisplayBox {
+background: #ffffff; 
+  border: 2px solid #1e293b; 
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #143170; 
+  text-align: center;
+  max-width: 300px;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.checkoutBtn {
+  display: inline-block;
+  background: #2563eb; 
+  color: #ffffff;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  text-align: center;
+  margin-top: auto;
+}
+
+.checkoutBtn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.checkoutBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
 
 .canvasHTML 
 {

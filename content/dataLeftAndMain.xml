@@ -27,13 +27,13 @@
 
     <laptop href="/laptop-asus-tuf-a14-fa401wv-ryzen-9-hx-370-32gb-1tb" src="laptop_icons/asus-tuf-a14.png" nume="ASUS TUF A14 FA401WV">
         <specificatii>
-            <motherboard>Gigabyte X670E AORUS Master</motherboard>
-            <cpu>AMD Ryzen 9 HX 370</cpu>
-            <gpu>NVIDIA GeForce RTX 4060</gpu>
-            <ram>32GB</ram>
-            <storage>1TB SSD</storage>
-            <display>14" 2.5K IPS 165Hz</display>
-            <os>No OS</os>
+            <motherboard price="469">Gigabyte X670E AORUS Master</motherboard>
+            <cpu price="599">AMD Ryzen 9 HX 370</cpu>
+            <gpu price="329">NVIDIA GeForce RTX 4060</gpu>
+            <ram price="139">32GB</ram>
+            <storage price="109">1TB SSD</storage>
+            <display price="249">14" 2.5K IPS 165Hz</display>
+            <os price="0">No OS</os>
         </specificatii>
     </laptop>
 

@@ -24,9 +24,9 @@
                     {
                         "customizable": true,
                         "multipleComponents": 4,
-                        "values": ["Kingston Fury Beast 16GB DDR5 RAM Stick", "Patriot Viper Venom 32GB DDR5 RAM Stick", "Corsair VENGEANCE 32GB DDR5 RAM Stick",
+                        "values": ["Kingston Fury Beast 16GB DDR5 RAM Stick", "Patriot Viper Venom 32GB DDR5 RAM Stick", 
                                     "Kingston Fury Beast 8GB DDR5 RAM Stick", "Patriot Viper Venom 16GB DDR5 RAM Stick", 
-                                    "Timetec 32GB DDR4 SO-DIMM 2666MHz"]
+                                    "Timetec 32GB DDR4 SO-DIMM 2666MHz", "Corsair VENGEANCE 32GB DDR5 RAM Stick"]
                     },
                     "STORAGE":
                     {
@@ -82,6 +82,46 @@
                         "multipleComponents": 1,
                         "values": ["Windows 11", "Windows 10", "Ubuntu", "Arch Linux", "Fedora Linux", "Manjaro Linux",
                                     "NixOS", "ChromeOS", "MS DOS"]
+                    }
+                }
+            },
+
+            {
+                "name": "Gigabyte X670E AORUS Master",
+                "dependencies":
+                {
+                    "CPU":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 1,
+                        "values": ["Intel Core i5-14600K", "Intel Core i7-14700K", "Intel Core i9-14900K"]
+                    },
+                    "GPU":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 1,
+                        "values": ["NVIDIA RTX 4070 SUPER", "NVIDIA RTX 4080 SUPER", "AMD Radeon RX 7900 XT"]
+                    },
+                    "RAM":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 4,
+                        "values": ["Corsair VENGEANCE 32GB DDR5 RAM Stick", "Crucial Pro Overclocking 32GB DDR5 RAM Stick",
+                                    "ADATA XPG Lancer Blade RGB 16GB DDR5 RAM Stick", "ADATA XPG Lancer Blade 32GB DDR5 RAM Stick",
+                                    "ADATA XPG Lancer RGB 64GB DDR5 RAM Stick", "Crucial Pro Overclocking 16GB DDR5 RAM Stick"]
+                    },
+                    "STORAGE":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 4,
+                        "values": ["SSD Samsung 990 PRO 2TB NVMe", "SSD WD Blue SA510 1TB SATA", "SSD Samsung 990 PRO 1TB",
+                                    "SSD WD Black SN850X", "Samsung 870 EVO 1TB"]
+                    },
+                    "OS":
+                    {
+                        "customizable": true,
+                        "multipleComponents": 2,
+                        "values": ["Windows 11", "Windows 10", "Ubuntu", "NixOS", "ChromeOS"]
                     }
                 }
             }
