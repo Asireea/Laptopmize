@@ -91,7 +91,7 @@ Promise.all([
 
     let nodeList = dataSideBar.querySelectorAll(`${sectionTag} > *`);
 
-    componentsContainer.appendChild(buildComponentElement(structSideBar, nodeList));
+    componentsContainer.appendChild( buildComponentElement(structSideBar, nodeList) );
   }
 
   // ---------------------- EVENT LOGIC ---------------------- //

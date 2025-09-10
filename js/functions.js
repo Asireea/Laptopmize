@@ -493,7 +493,8 @@ function toggleSideBar()
 function buildComponentElement(struct, itemSection)
 {
     // clone the menu section from the struct XML along with its children
-    const menuSectionClone = struct.querySelector(".menu-section").cloneNode(true);
+    let menuSectionClone = struct.querySelector(".menu-section").cloneNode(true);
+    menuSectionClone = convertXmlToHtml(menuSectionClone);
 
     // extract the component name
     const itemName = itemSection[0].tagName;
@@ -528,8 +529,11 @@ function buildComponentTitle(menuSection, componentName)
     //  with the componentName as a parameter
     titleClone.addEventListener("click", (e) => {
         e.preventDefault();
+        console.log("here");
         // call the function to toggle the submenu
         toggleMenu(componentName);
+
+        console.log("here2");
     });
 
     // replace the element that will give the component's title

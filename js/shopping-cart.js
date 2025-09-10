@@ -37,7 +37,7 @@ if(cartCount != 0)
     getItemCartCookies("cartItems").forEach(itemInCart => 
     {
         let totalLaptopPrice = 0;
-        //console.log(itemInCart);
+        
         let itemBoxClone = concreteParent.cloneNode(true);
 
         // Clone the <ul> template for this cookie
@@ -184,7 +184,7 @@ if(cartCount != 0)
             //itemBoxClone.querySelector(".specsUl").replaceWith(ulClone);
         }// end for key in detailsObj
 
-        itemBoxClone.querySelector(".specsUl").replaceWith(ulClone);
+        itemBoxClone.querySelector(".specsUl").replaceWith(convertXmlToHtml(ulClone));
 
         // pass the countDisplay the number of laptops in the cookie
         itemBoxClone.querySelector(".countDisplay").innerHTML = itemObj.itemCount;

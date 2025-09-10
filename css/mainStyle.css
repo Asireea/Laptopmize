@@ -527,9 +527,9 @@ nav {
     border-radius: 8px;
 }
 
-.specsUl {
+.itemBox ul {
     width: 70%;
-    list-style: none; /* Remove bullets */
+    list-style-type: none;
     padding: 0;
     margin-left: 5px;
     margin-top: 1px;
