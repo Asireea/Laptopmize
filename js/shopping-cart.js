@@ -1,6 +1,13 @@
+// ----------------- SHOPPING CART SCRIPT ----------------- //
 
+
+// variables used to handle XML files where:
+// structShoppingCartXML -> structShoppingCart.xml
+// dataComponentsXML -> dataComponenents.xml
+// dataLaptopsXML -> dataLeftAndMain.xml
 let structShoppingCartXML, dataComponentsXML, dataLaptopsXML;
 
+// variable used to calculate the total price of all items in the shopping cart
 let finalTotalPrice = 0;
 
 // ----------------- XML LOADER FOR ITEMS IN THE CART ----------------- //
@@ -14,12 +21,15 @@ Promise.all([
 .then(([structShoppingCartXml, dataSideBarXml, dataLaptopsXml, compatibilitiesJson]) => {
     const parser = new DOMParser();
 
+     // Parse XML responses into DOM objects for traversal
     structShoppingCartXML = parser.parseFromString(structShoppingCartXml, "application/xml");
     dataComponentsXML = parser.parseFromString(dataSideBarXml, "application/xml");
     dataLaptopsXML = parser.parseFromString(dataLaptopsXml, "application/xml");
 
 if(cartCount != 0)
 {
+// ------------------ create DOM elements for the shopping cart page ------------------
+
     let cartPage = document.createElement("section");
     cartPage.classList.add("cartPage");
 
@@ -34,6 +44,7 @@ if(cartCount != 0)
 
     let concreteParent = structShoppingCartXML.querySelector(".itemBox");
     
+// ----------------- Handle cookies and build the page based on cookie information -----------------
     getItemCartCookies("cartItems").forEach(itemInCart => 
     {
         let totalLaptopPrice = 0;
@@ -80,7 +91,6 @@ if(cartCount != 0)
             if(key=="src")
             {
                 iconImg.setAttribute("src", detailsObj[key]);
-                //console.log("in if " + key);
             }
             else if(key=="customComponents")
             {
@@ -93,8 +103,6 @@ if(cartCount != 0)
             }
             else
             {
-                //console.log("in else " + key);
-
                 if(key == "motherboard")
                 {
                     laptopIsOK = (currentLaptop.querySelector("motherboard").textContent == detailsObj[key]);
@@ -139,26 +147,23 @@ if(cartCount != 0)
                                                     totalLaptopPrice += parseFloat(item.querySelector("Price").textContent);
                                                     
                                                 }
-                                            });
-                                        }
-
-                                    
-                                    //totalLaptopPrice += parseFloat(currentLaptop.querySelector(key.toLowerCase()).getAttribute("price"));
-                                }
-                            }
-                        }
-                        else
+                                            }); // end forEach item
+                                        } // end for i
+                                } // end if(laptopIsOK)
+                            } // end check 2
+                        } // end forEach customization
+                        else // the other case where th component is the default one
                         {
+                            // check if it passed the first test of the motherboard
                             if(laptopIsOK)
-                            {
                                 totalLaptopPrice += parseFloat(currentLaptop.querySelector(key.toLowerCase()).getAttribute("price"));
-                            }
                         }
                     }); // end for each customization
+                } // end if((key != "motherboard") && (key != "name"))
 
-                    
-                } 
+// ----------------------------------- update DOM elements visually -----------------------------------
 
+                // update the li element to display a customized component
                 let liClone = innerChild.cloneNode(true);
                 
                 liClone.querySelector("strong").innerHTML = key;
@@ -176,12 +181,10 @@ if(cartCount != 0)
                         liClone.querySelector("strong").innerHTML = "&#128295; " + key;
                     }
                 }
-                
 
                 ulClone.appendChild(liClone);
-            }
+            } // end else (in checking which key is current)
 
-            //itemBoxClone.querySelector(".specsUl").replaceWith(ulClone);
         }// end for key in detailsObj
 
         itemBoxClone.querySelector(".specsUl").replaceWith(convertXmlToHtml(ulClone));
@@ -189,6 +192,7 @@ if(cartCount != 0)
         // pass the countDisplay the number of laptops in the cookie
         itemBoxClone.querySelector(".countDisplay").innerHTML = itemObj.itemCount;
 
+        // display the laptop card in the shopping cart if everything is fine
         if(laptopIsOK)
         {
             // append a box that shows the price 
@@ -199,18 +203,18 @@ if(cartCount != 0)
             plusOrMinusItem(itemBoxClone, totalLaptopPrice);
             trashItem(itemBoxClone, totalLaptopPrice);
         }
-        else
+        else // grey out the laptop card if anything is wrong with it and block all user actions on it 
         {
             itemBoxClone.style.filter = "grayscale(1)";
             itemBoxClone.style.opacity = "0.5";
         }
 
-        //console.log(totalLaptopPrice);
         // append the individual laptop card to tbe container
         cartContainer.appendChild(itemBoxClone);
-        //itemBoxClone = tempItemBoxClone.cloneNode(true);
+
     }); // end forEach itemInCart
 
+    // append all DOM elements to the HTML
     document.querySelector("body").appendChild(cartPage);
     cartPage.appendChild(cartContainer);
     cartPage.appendChild(finalizeStepsBox);
@@ -220,8 +224,6 @@ if(cartCount != 0)
     checkoutBtn.classList.add("checkoutBtn");
     checkoutBtn.textContent = "Proceed To Checkout";
     finalizeStepsBox.appendChild(checkoutBtn);
-
-    console.log(finalTotalPrice);
 
     cartPage.style.paddingTop = getElementHeight("#navigationBar") + "px";
 
@@ -303,8 +305,8 @@ function plusOrMinusItem(section, price)
                 // and set the cookie with the new value in itemCount
                 cartItem.itemCount = count;
                 setCookie(cookieName, JSON.stringify([cartItem]), 7);
-
             }
+
 
             let lessButton = moreButton.parentElement.querySelector(".lessButton");
             if(count > 1)
@@ -317,8 +319,8 @@ function plusOrMinusItem(section, price)
                 lessButton.style.color = "#b7b7b7";
                 lessButton.style.cursor = "default";
             }
-        });
-    });
+        });// end event listener
+    }); // end forEach
     
     // ----------------- MINUS BUTTON ----------------- //
 
@@ -343,7 +345,6 @@ function plusOrMinusItem(section, price)
 
         lessButton.addEventListener("click", (e) => {
             // select the element that will display the number of same laptops in the shopping cart
-            //let countDisplay = lessButton.parentElement.querySelector(".countDisplay");
             // and parse to integer
             count = Number(countDisplay.innerText);
 
@@ -412,10 +413,12 @@ function plusOrMinusItem(section, price)
     }); // end forEach
 } // end function
 
+// utilitary function to delete a cookie
 function delete_cookie(name) {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
+// function that handles processes when an item in the shopping cart is deleted
 function trashItem(section, price)
 {
     let cancelOrderButtons = section.querySelectorAll(".cancelOrderButton");
@@ -479,19 +482,22 @@ function trashItem(section, price)
 
 // ----------------- UTILITY FUNCTIONS FOR THE EMPTY SHOPPING CART PAGE ----------------- //
 
+// Resize the canvas to match the current browser window size
 function sizeCanvas(canvas) 
 {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 
+// Initialize the drawing context with a monospace font
 function initFont(ctx, fontSize) 
 {
     ctx.font = fontSize + "px monospace";
-    ctx.textBaseline = "top";
-    ctx.textAlign = "start";
+    ctx.textBaseline = "top"; // Align text to top edge
+    ctx.textAlign = "start"; // Align text horizontally to the left
 }
 
+// Create an array of "drops" (falling letters), one per column
 function createDrops(columns, canvasHeight, fontSize) 
 {
     return Array.from({ length: columns }, () =>
@@ -499,14 +505,17 @@ function createDrops(columns, canvasHeight, fontSize)
     );
 }
 
+// Reset drops and the "ground" (letters that have landed)
+// Also calculates where the message should be centered
 function resetDropsAndGround(columns, canvasHeight, fontSize, message) 
 {
-    const drops = createDrops(columns, canvasHeight, fontSize);
-    const ground = new Array(columns).fill(null);
-    const messageCols = Math.max(0, Math.floor((columns - message.length) / 2));
+    const drops = createDrops(columns, canvasHeight, fontSize);                     // Starting positions
+    const ground = new Array(columns).fill(null);                                   // Holds landed chars
+    const messageCols = Math.max(0, Math.floor((columns - message.length) / 2));    // Message centering
     return { drops, ground, messageCols };
 }
 
+// Load an image asynchronously and notify when ready
 function loadImage(src, onReady) 
 {
     const img = new Image();
@@ -515,12 +524,14 @@ function loadImage(src, onReady)
     img.onload = () => 
     {
         imageReady = true;
-        onReady(true);
+        onReady(true); // Notify caller that image is ready
     };
 
     img.onerror = () => console.error("Failed to load image:", src);
 
     img.src = src;
+
+     // If image is already cached/loaded
     if (img.complete && img.naturalWidth) 
     {
         imageReady = true;
@@ -530,11 +541,14 @@ function loadImage(src, onReady)
     return { img, imageReady };
 }
 
+// Recalculate layout when window resizes or content changes
+// Determines image size/position and message position
 function recalcLayout(canvas, fontSize, imageReady, img, maxImgWidth, 
-    messageLength, resetFn) 
+                    messageLength, resetFn) 
 {
     let imgWidth = 0, imgHeight = 0, imgY = 0, messageY = 0;
 
+    // If an image is available, scale it down if needed
     if (imageReady && img && img.width > 0) 
     {
         const scale = Math.min(1, maxImgWidth / img.width);
@@ -542,36 +556,43 @@ function recalcLayout(canvas, fontSize, imageReady, img, maxImgWidth,
         imgHeight = img.height * scale;
     }
 
-    const spacing = 20;
+    const spacing = 20; // Gap between image and message
     const hasImage = imageReady && imgWidth > 0;
+
+    // Total vertical block (image + spacing + message)
     const blockHeight = (hasImage ? imgHeight + spacing : 0) + fontSize;
     const startY = Math.max(0, (canvas.height - blockHeight) / 2);
 
+     // Position image and message
     imgY = startY;
     messageY = hasImage ? imgY + imgHeight + spacing : startY;
 
+    // Reset state (drops + ground) if required
     if (resetFn) resetFn();
+
     return { imgWidth, imgHeight, imgY, messageY };
 }
 
-
+// Draw a single animation frame
 function drawFrame(ctx, canvas, drops, ground, letters, 
     message, messageCols, fontSize, messageY, img, imageReady, 
     imgWidth, imgHeight, imgY) 
 {
-    // Faint white fade to create trails
+    // Faint white overlay to create fading trails
     ctx.fillStyle = "rgba(255,255,255,0.1)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Falling letters
+    // Loop over each column
     for (let i = 0; i < drops.length; i++) 
     {
         const x = i * fontSize;
         const y = drops[i] * fontSize;
 
+         // Check if column overlaps the message area
         const withinMessageCols = i >= messageCols && i < messageCols + message.length;
         const targetChar = withinMessageCols ? message[i - messageCols] : null;
 
+        // If a letter has "landed" (on the ground), draw it in place
         if (ground[i]) 
         {
             ctx.fillStyle = "#174e91";
@@ -579,20 +600,23 @@ function drawFrame(ctx, canvas, drops, ground, letters,
             continue;
         }
 
+        // Otherwise, draw a random falling letter
         const ch = letters[Math.floor(Math.random() * letters.length)];
         ctx.fillStyle = "#174e91";
         ctx.fillText(ch, x, y);
 
+         // Move the drop downward slowly
         drops[i] += 0.5; // speed
 
+        // When drop reaches message row, "land" it if needed
         if (y >= messageY) 
         {
-            if (targetChar) ground[i] = targetChar;
-            drops[i] = Math.floor(Math.random() * -20);
+            if (targetChar) ground[i] = targetChar;  // Lock in correct letter
+            drops[i] = Math.floor(Math.random() * -20); // Reset drop above screen
         }
     } // end for
 
-    // Draw image last (on top)
+    // Draw image last (on top) centered
     if (imageReady && imgWidth > 0) 
     {
         const imgX = (canvas.width - imgWidth) / 2;
@@ -606,15 +630,17 @@ function drawEmptyShoppingCartPage()
     const canvas = document.querySelector("canvas");
     const ctx = canvas.getContext("2d");
 
-
+    // Animation settings
     const fontSize = 28;
     const letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ".split("");
     const message = "YOUR SHOPPING CART IS EMPTY";
     const maxImgWidth = 300;
 
+    // Initialize canvas and font
     sizeCanvas(canvas);
     initFont(ctx, fontSize);
 
+    // Set up initial state
     let columns = Math.floor(canvas.width / fontSize);
     let { drops, ground, messageCols } = resetDropsAndGround(columns, canvas.height, fontSize, message);
 
@@ -622,26 +648,31 @@ function drawEmptyShoppingCartPage()
     let imageReady = false;
     let layout;
 
+    // Load mascot image :))
     ({ img } = loadImage("images/russified-tux.png", (ready) => 
     {
         imageReady = ready;
         layout = recalcLayout(canvas, fontSize, imageReady, img, maxImgWidth, message.length, resetState);
     }));
 
+    // Calculate layout initially
     layout = recalcLayout(canvas, fontSize, imageReady, img, maxImgWidth, message.length, resetState);
 
+    // Reset function (called on resize or relayout)
     function resetState() 
     {
         columns = Math.floor(canvas.width / fontSize);
         ({ drops, ground, messageCols } = resetDropsAndGround(columns, canvas.height, fontSize, message));
     }
 
+     // Animation loop
     function animate() 
     {
         drawFrame(ctx, canvas, drops, ground, letters, message, messageCols, fontSize, layout.messageY, img, imageReady, layout.imgWidth, layout.imgHeight, layout.imgY);
         requestAnimationFrame(animate);
     }
 
+    // Handle window resize
     window.addEventListener("resize", () => 
     {
         sizeCanvas(canvas);
@@ -649,12 +680,14 @@ function drawEmptyShoppingCartPage()
         layout = recalcLayout(canvas, fontSize, imageReady, img, maxImgWidth, message.length, resetState);
     });
 
+     // Start animation ---- FINALLY
     requestAnimationFrame(animate);
 }
 
 
 // ------------------------- HANDLE COOKIE CORRECTION IN SHOPPING CART -------------------------
 
+// utiliary function to check if a laptop is customized or default
 function checkDefault(href, component, dataLaptopsXml)
 {
     let item = dataLaptopsXml.querySelector('laptop[href="' + href + '"] specificatii > ' + component.name );
@@ -662,9 +695,9 @@ function checkDefault(href, component, dataLaptopsXml)
 
     return (  item && (component.value == item.textContent.trim().toLowerCase() ) 
                 && (component.pret == parseFloat(item.getAttribute("pret")) )  );
-
 }
 
+// utiliary function used to handle logic when a string is from an html
 function decodeHtmlEntities(str) 
 {
     const txt = document.createElement("textarea");
@@ -672,6 +705,7 @@ function decodeHtmlEntities(str)
     return txt.value;
 }
 
+// utiliary function to check if a laptop exists in the xml 
 function checkIfLaptopExists(laptopCookie, dataLaptopsXml)
 {
     // select the clicked laptop by href, from data xml
@@ -690,6 +724,7 @@ function checkIfLaptopExists(laptopCookie, dataLaptopsXml)
     }
 }
 
+// utiliary function to check if a component exists in the components xml
 function checkIfComponentExists(dataComponentsXML, componentValue) {
     let sections = dataComponentsXML.querySelector("root").children;
 
@@ -708,6 +743,8 @@ function checkIfComponentExists(dataComponentsXML, componentValue) {
     return false; // nothing matched
 }
 
+// utiliary function to handle the cae where there are multiple customizations
+// returns each customization as a string in an array of strings
 function normalizeComponentValues(compValues) 
 {
     return compValues

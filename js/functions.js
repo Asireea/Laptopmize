@@ -1,20 +1,21 @@
-
 // ------------------ UTILITY FUNCTIONS ------------------ //
 
-// function to calculate the height of a HTML element
+// function to calculate the height of an HTML element
 function getElementHeight(selector) 
 {
     const element = document.querySelector(selector);
+
     if (!element) 
         {
         console.warn('Element not found');
         return null;
         }
+
     const height = element.offsetHeight + topLeftAndMainPadding; // Includes padding + border (but not margin)
     return height;
 }
 
-// function to calculate the width of a HTML element
+// function to calculate the width of an HTML element
 function getElementWidth(selector) 
 {
     const element = document.querySelector(selector);
@@ -44,7 +45,9 @@ function formatTag(str)
     // returns the main tag and the specs (as array)
     return [arr[0], specificatiiFilter];
 }
-//TODO: to comment this function and the code inside it
+
+// function to remove any form of attribute containing "data-js"
+// previously used to work with XMLs
 function removeDocumentDataJsAttributes()
 {
     document.querySelectorAll("body, body *").forEach(node => 
@@ -58,10 +61,12 @@ function removeDocumentDataJsAttributes()
         } //end-for
     }); //end forEach
 }
+
 // recursively converts an XML DOM node to an equivalent HTML DOM node
 // takes the xml node to convert
 // returns the html element
-function convertXmlToHtml(xmlNode) {
+function convertXmlToHtml(xmlNode) 
+{
     // Create an HTML element using a tag or a default wrapper
     let htmlNode;
     // Text node case
@@ -86,12 +91,14 @@ function convertXmlToHtml(xmlNode) {
 
 // ------------------ RENDERING FUNCTIONS ------------------ //
 
-function setContainerLeft() {
-        // calculate and style the big specs container so that it has a corresponding width
-        const specsPage = document.querySelector("#laptopSpecsPage");
-        specsPage.style.left = getElementWidth("#leftContainerLaptopuri") + "px";
-    }
+function setContainerLeft() 
+{
+    // calculate and style the big specs container so that it has a corresponding width
+    const specsPage = document.querySelector("#laptopSpecsPage");
+    specsPage.style.left = getElementWidth("#leftContainerLaptopuri") + "px";
+}
 
+// utility function used to fill "data-js-attributes" in elements built from xml structures
 function fillAttributes(section, laptop) 
 { 
     section.querySelectorAll('[data-js-attributes]').forEach(element => 
@@ -108,6 +115,7 @@ function fillAttributes(section, laptop)
     }); // end forEach element
 }
 
+// utility function used to fill "data-js-innerText" in elements built from xml structures
 function fillInnerText(section, laptop)
 {
     // Set innerText for elements with data-js-innerText
@@ -118,6 +126,7 @@ function fillInnerText(section, laptop)
     }); // end forEach child
 }
 
+// // utility function used to fill "data-js-iterator" in elements built from xml structures
 function processIterators(section, laptop)
 {
     // loop through all elements with data-js-iterator
@@ -192,12 +201,11 @@ function processIterators(section, laptop)
     });// end-forEach iterator
 }
 
-
+// utility function used to build the specifications of a laptop, from xml
 function renderLaptopSpecs(laptopHref, data, struct, compatibilitiesJson)
 {
-    
     customComponents = [];
-    //console.log("custom components = ", customComponents.join(' @ '));
+
     document.querySelector(".sidebarCloser").click();
 
     // select the clicked laptop by href, from data xml
@@ -235,6 +243,7 @@ function renderLaptopSpecs(laptopHref, data, struct, compatibilitiesJson)
 
 }
 
+// utility function used to build the buttons from specs page
 function renderSpecsPageButtons(struct)
 {
     // clone the buttons container 
@@ -258,42 +267,19 @@ function renderSpecsPageButtons(struct)
     toggleSideBar();
 
 }
-/*
-function getCenter(imgIconElement)
-    {
-        
-        //---------------------- Get original image's center ----------------------
-        
-        let imgParent = imgIconElement.parentElement;
-        
-        let imgRect = imgIconElement.getBoundingClientRect();
-        let parentRect = imgParent.getBoundingClientRect();
-
-        
-        
-        // Center of the image relative to its parent
-        //let centerX = imgRect.left - parentRect.left + imgRect.width / 2;
-        //let centerY = imgRect.top - parentRect.top + imgRect.height / 2;
-
-        return {X: imgRect.left - parentRect.left + imgRect.width / 2,
-                Y: imgRect.top - parentRect.top + imgRect.height / 2};
-    }
-*/
 
 function getCenter(imgIconElement)
 {
-    
     //---------------------- Get original image's center ----------------------
     
     let imgRect = imgIconElement.getBoundingClientRect();
     
-    // Center of the image relative to its parent
-    //let centerX = imgRect.left - parentRect.left + imgRect.width / 2;
-    //let centerY = imgRect.top - parentRect.top + imgRect.height / 2;
+    // get the center coordinates of an image
     return {X: imgRect.left + imgRect.width / 2,
             Y: imgRect.top + imgRect.height / 2};
 }
 
+// function to process the animation movement of the little ghost image to the shopping cart icon
 function moveLaptopToCart() 
 {
     // select the 'add to cart' button
@@ -303,25 +289,10 @@ function moveLaptopToCart()
     // and clone it
     let imgContainer = document.querySelector("#laptopSpecsContainer");
 
-        let originalImage = document.querySelector(".mainLaptopIcon");
+    let originalImage = document.querySelector(".mainLaptopIcon");
 
     centerX = (getCenter(originalImage)).X;
     centerY = (getCenter(originalImage)).Y;
-    /*
-    // select the original laptop image from specs page
-    let originalImage = document.querySelector(".mainLaptopIcon");
-
-    //---------------------- Get original image's center ----------------------
-
-    let imgParent = originalImage.parentElement;
-
-    let imgRect = originalImage.getBoundingClientRect();
-    let parentRect = imgParent.getBoundingClientRect();
-
-    // Center of the image relative to its parent
-    const centerX = imgRect.left - parentRect.left + imgRect.width / 2;
-    const centerY = imgRect.top - parentRect.top + imgRect.height / 2;
-    */
 
     // add an event to the 'add to cart' button
     addToCartButton.addEventListener("click", (e) => {
@@ -350,8 +321,6 @@ function moveLaptopToCart()
                 // position the ghost image on top of the laptop image and in the middle
                 img.style.left = centerX - img.offsetWidth/8 + "px";
                 img.style.top = centerY - img.offsetHeight/8 + "px";
-
-                //console.log("left: ", img.style.left, " top: ", img.style.top);
 
                 // and make it smaller :))
                 img.style.width = "5%";
@@ -409,6 +378,7 @@ function moveLaptopToCart()
     }); // end event-listener
 }// end function moveLaptopToCart
 
+// function to process what happens when an item is added to cart
 function addToCart()
 {
     // increase the number of items
@@ -425,6 +395,7 @@ function addToCart()
     addItemToCart();
 }
 
+// customizations side-bar processes
 function toggleSideBar() 
 {
     // select the element that will display the customization menu
@@ -529,11 +500,9 @@ function buildComponentTitle(menuSection, componentName)
     //  with the componentName as a parameter
     titleClone.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log("here");
+
         // call the function to toggle the submenu
         toggleMenu(componentName);
-
-        console.log("here2");
     });
 
     // replace the element that will give the component's title
@@ -561,8 +530,6 @@ function toggleMenu(id)
     const currentSection = document.getElementById(id);
     // give the active section the class "active"
     currentSection.classList.toggle('active');
-
-    
 }
 
 // build the submenu of each component
@@ -762,9 +729,18 @@ function addHolderContainer(iteratedElement, numberOfHolders)
 
 // ------------------ FUNCTIONS FOR DRAG AND DROP ACTION ------------------ //
 
+let currentDraggedId = null;
+let currentDraggedType = null;
+/*
 function dragstartHandler(ev) {
     ev.dataTransfer.setData("text", ev.target.getAttribute("data-id"));
+    currentDraggedType = ev.target.getAttribute("data-type"); // store globally
+}*/
 
+function dragstartHandler(ev) {
+    currentDraggedId = ev.target.getAttribute("data-id");   // store ID
+    currentDraggedType = ev.target.getAttribute("data-type"); // store type
+    ev.dataTransfer.setData("text", currentDraggedId);       // still set ID for drop
 }
 
 function dragoverHandler(ev) {
@@ -772,16 +748,19 @@ function dragoverHandler(ev) {
     
     if(ev.target.tagName == "DIV" && ev.target.classList.contains("holder"))
     {
-        const data = ev.dataTransfer.getData("text");
-
         // select the container of the holder element
         let holderContainer = ev.currentTarget.parentElement;
 
         // select the whole li element
         let specContainer = holderContainer.parentElement.parentElement;
 
+        let draggedElement = document.querySelector(`[data-id="${currentDraggedId}"]`);
+        if (!draggedElement) {
+            console.warn("No element found for data-id", currentDraggedId);
+            return;
+        }
 
-        let draggedElement = document.querySelector(`[data-id="${data}"]`);
+        //let draggedElement = document.querySelector(`[data-id="${currentDraggedType.trim()}"]`);
         let clone = draggedElement.cloneNode(true); // clone the image that will be dropped
 
         // ---------- check incompatibilities ----------
@@ -806,8 +785,6 @@ function dragoverHandler(ev) {
         }
     }
     else return;
-
-    
 }
 
 function dropHandler(ev, dataLaptop, dataSideBar) {
@@ -879,7 +856,6 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
     let priceDisplayBox = document.querySelector(".priceDisplayBox");
     let totalLaptopPrice = calcUpdatedPrice(dataLaptop, dataSideBar);
 
-    //console.log("total laptop price in drophandler " + totalLaptopPrice);
     // update the price in the price display box
     priceDisplayBox.textContent = "Price: " + totalLaptopPrice + " \u20AC";
 
@@ -939,7 +915,6 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
             holderContainer.querySelector(".holder").firstChild.remove();
 
             totalLaptopPrice = calcUpdatedPrice(dataLaptop, dataSideBar);
-            //console.log("total price in cancel " + totalLaptopPrice); 
 
             priceDisplayBox.textContent = "Price: " + totalLaptopPrice + " \u20AC";
         }
@@ -950,7 +925,9 @@ function dropHandler(ev, dataLaptop, dataSideBar) {
     });// end eventListener
 }
 
+// ----------------------------- utilitary functions for security -----------------------------
 
+// utility function that checks if components are compatible, according to compatibilities.json
 function runCompatibility(compatibilitiesJson)
 {
     // html specification items
@@ -1034,8 +1011,8 @@ function runCompatibility(compatibilitiesJson)
         }); // end forEach item
 }
 
-// ---------------------------------------------------------------------------
-
+// utility function that checks if components are compatible, according to compatibilities.json
+// but works on idividual components
 function checkCompatibility(compatibilitiesJson, parentComp, parentCompName, compToCheck)
 {
     // get the big component from json (e.g. MOTHERBOARD, DISPLAY)
@@ -1072,29 +1049,14 @@ function checkCompatibility(compatibilitiesJson, parentComp, parentCompName, com
     return false;
 }
 
-
-
-// ---------------------------------------------------------------------------
-
-
+// utilitary function that just adds a preventDefault
 function addPreventDefault(e)
 {
     e.preventDefault();
 }
 
-/*
-function redirectToSHoppingCart()
-{
-    let shoppingCart = document.getElementById("shoppingCartLink");
+// ------------------------ COOKIE PROCESSING FUNCTIONS ------------------------
 
-    shoppingCart.addEventListener("click", (e) =>{
-        e.preventDefault();
-
-        window.location.assign(HTTP_HOST + shoppingCart.getAttribute("href"));
-
-    });
-}
-*/
 // Helper function to set a cookie
 function setCookie(name, value, days) 
 {
@@ -1108,30 +1070,7 @@ function setCookie(name, value, days)
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 
-/*
-// Helper function to get a cookie by name (returns "name=value")
-function getCookie(name) {
-    // Build the string we want to search for, e.g. "cartItems="
-    let nameEQ = name + "=";
-
-    // Get all cookies from document.cookie and split them into an array
-    let ca = document.cookie.split(';');
-
-    // Loop through each cookie in the array
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i].trim();
-
-        if (c.indexOf(nameEQ) === 0) {
-            // Return full "name=value" so JSONtoObject can parse it
-            return name + "=" + c.substring(nameEQ.length, c.length);
-        }
-    }
-
-    // If no cookie with the given name is found, return null
-    return null;
-}
-*/
-
+// helper function to get only the value of a cookie (the part after "="), by cookie name
 function getCookieValue(name)
 {
     if(getCookie(name))
@@ -1161,7 +1100,7 @@ function getCookie(name) {
     return null;
 }
 
-
+// utilitary function that processes the cookie for each item added to cart
 function addItemToCart()
 {
     let specsPageParent = document.querySelector("#laptopSpecsPage");
@@ -1173,7 +1112,6 @@ function addItemToCart()
 
     // array of cookies with the name containing the input string
     let cartItems = sortCookiesByName(getItemCartCookies("cartItems"));
-    //console.log(cartItems);
 
     // get the next name of cookie
     let nameOfCookie = "cartItems" + (getLastCartIndex(cartItems) + 1);
@@ -1246,7 +1184,6 @@ function withoutCookieName(obj)
     return clone;
 }
 
-
 // A helper function to get the number after "cartItems"
 function getCartIndex(str) 
 {
@@ -1257,7 +1194,6 @@ function getCartIndex(str)
     return match ? Number(match[1]) : 0;      
 }
 
-
 // function to sort the cookies
 function sortCookiesByName(cookieArray) 
 {
@@ -1265,6 +1201,7 @@ function sortCookiesByName(cookieArray)
     .sort((a, b) => getCartIndex(a) - getCartIndex(b));
 }
 
+// function to get the index of last cookie set
 function getLastCartIndex(cookieArray)
 {
     if(cookieArray.length == 0)
@@ -1273,12 +1210,6 @@ function getLastCartIndex(cookieArray)
     return getCartIndex(cookieArray[cookieArray.length - 1]);
 }
 
-/*
-function extractIndexCookieCart(cookieName)
-{
-    let cookieName = JSON.stringify(item).match(/^([^=]+)=/)[1];
-    return cookieName.slice(-1);
-}*/
 
 // returns true if the objects are equal 
 // or false if the objects are not equal
@@ -1289,6 +1220,7 @@ function compareObjects(obj1, obj2) {return JSON.stringify(obj1) === JSON.string
 //then filters out only the ones that include the given cookieName parameter
 function getItemCartCookies(cookieName) {return document.cookie.split("; ").filter(str => str.includes(cookieName));}
 
+// utilitary function to transform a json-format to a object that can be used
 function JSONtoObject(stringToTransform)
 {
     let objName = stringToTransform.match(/^([^=]+)=/)[1];
@@ -1303,7 +1235,7 @@ function JSONtoObject(stringToTransform)
     //let details = cartItems[0].details;
 }
 
-
+// utilitary function to manipulate the customComponents array
 function addToCustomComponents(item)
 {
     if(! customComponents.includes(item)) 
@@ -1315,70 +1247,80 @@ function removeFromCustomComponents(item)
     customComponents = customComponents.filter(value => value !== item);
 }
 
-function calcTotalPrice(item)
-{
-    // item is the parent of all children with price attribute
+// Calculate the total price of all elements with a "price" attribute within a given parent item
+function calcTotalPrice(item) {
+    // 'item' is the parent element containing child elements with a "price" attribute
 
     let totalPrice = 0;
 
+    // Loop through all children that have a "price" attribute
     item.querySelectorAll('[price]').forEach(priceItem => {
-        
+        // Get the value of the "price" attribute
         let price = priceItem.getAttribute("price");
+
+        // Convert it to a float and add it to the total
         totalPrice += parseFloat(price);
     });
 
+    // Return the sum of all prices
     return totalPrice;
 }
 
-
+// Get the laptop data from an XML document that corresponds to the current page URL
 function getCurrentLaptopByHref(dataLaptopsXml)
 {
-    // extract the identifier of product from the URL
-    // Example: https://example.com/laptop-lenovo-ideapad-slim-5-14irh10-i5-13420h-32gb-1tb
+    // Extract the last segment of the URL path as the product identifier
+    // Example: where https://example.com/laptop-lenovo-ideapad-slim-5-14irh10-i5-13420h-32gb-1tb
+    // the extracted part is: "laptop-lenovo-ideapad-slim-5-14irh10-i5-13420h-32gb-1tb"
 
     const pathParts = window.location.pathname.split("/");
     const productLink = pathParts[pathParts.length - 1]; // laptop-lenovo-ideapad-slim-5-14irh10-i5-13420h-32gb-1tb
 
     let dataLaptop;
 
+    // Loop through all <laptop> elements in the XML
     dataLaptopsXml.querySelectorAll("laptop").forEach(laptop => {
         let laptopHref = laptop.getAttribute("href");
 
+         // Check if the href (without leading "/") matches the product identifier from URL
         if(laptopHref.substring(1) == productLink)
         {
-            dataLaptop = laptop;
-            return;
+            dataLaptop = laptop; // Store the matching laptop
+            return; // exit forEach early 
         }
-
     });
 
-    return dataLaptop;
-    
+    return dataLaptop; // Return the matching laptop element, or undefined if not found
 }
 
+// Get the XML node corresponding to a customization component dropped by the user
 function getCurrentCustomization(dataCustomComponentsXml, droppedComp)
 {
     let dataCustomization;
 
+    // Get all direct children of <root> in the XML
     let sections = dataCustomComponentsXml.querySelector("root").children;
 
+    // Loop through each section (e.g., CPU, GPU, RAM, STORAGE etc.)
     for (let i = 0; i < sections.length; i++)
     {
         let sectionTag = sections[i].tagName;
 
+        // Get all items in the xml that builds the sidebar, that belong to the current section
         let nodeList = dataSideBar.querySelectorAll(`${sectionTag} > *`);
 
         nodeList.forEach(item => {
+            // Compare each item's "nume" attribute to the data-id of the dropped component
             let itemName = item.getAttribute("nume");
             if(itemName == droppedComp.getAttribute("data-id"))
             {
-                dataCustomization = item;
-                return;
+                dataCustomization = item; // Store the matching customization
+                return; // exit forEach early 
             }
         });
     }
 
-    return dataCustomization;
+    return dataCustomization; // Return the matching customization node, or undefined if not found
 }
 
 
@@ -1389,7 +1331,7 @@ case 3: the <li> element has more holders and all are empty
 case 4: the <li> element has more holders and at least one has an image
 case 4: the <li> element has no holders
 */
-
+// utilitary function that updates the price, upon customization made
 function calcUpdatedPrice(dataLaptop, dataCustomComponentsXml)
 {
     let currentLaptop = getCurrentLaptopByHref(dataLaptop);
